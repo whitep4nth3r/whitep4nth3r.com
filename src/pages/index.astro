@@ -1,0 +1,29 @@
+---
+import Base from "@layouts/Base.astro";
+import type { OpenGraphData } from "../types";
+import { OpenGraphGenerator } from "@src/utils/openGraphGenerator";
+
+const openGraphImageUrl = await OpenGraphGenerator.generateImageUrl(
+  "Live streamer, software engineer and developer educator",
+);
+
+const pageTitle =
+  "Salma Alam-Naylor — live streamer, software engineer and developer educator";
+
+const openGraphData: OpenGraphData = {
+  url: "https://whitep4nth3r.com/",
+  imageAlt: OpenGraphGenerator.generateImageAlt(pageTitle),
+  imageUrl: openGraphImageUrl,
+  imageWidth: OpenGraphGenerator.imgWidth,
+  imageHeight: OpenGraphGenerator.imgHeight,
+};
+---
+
+<Base
+  title={pageTitle}
+  canonical="https://whitep4nth3r.com"
+  metaDescription="I write code for your entertainment. I stream live coding on Twitch, help developers build great websites, and love helping people get into tech."
+  openGraph={openGraphData}
+>
+  <h1>home page with correct meta data in the head</h1>
+</Base>
