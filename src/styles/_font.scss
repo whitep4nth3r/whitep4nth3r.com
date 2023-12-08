@@ -1,0 +1,70 @@
+@font-face {
+  font-family: "Inter UI var";
+  font-weight: 400 900; /* safe weight range */
+  src:
+    url("/fonts/Inter-UI.var.woff2") format("woff2-variations"),
+    url("/fonts/Inter-UI.var.woff2") format("woff2");
+  font-style: normal;
+  font-stretch: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Atomic Marker";
+  src: url("/fonts/AtomicMarker.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "Atomic Marker Extras";
+  src: url("/fonts/AtomicMarkerExtras.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "Atomic Marker Extras Two";
+  src: url("/fonts/AtomicMarkerExtrasTwo.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  font-display: block;
+}
+
+@mixin font_main {
+  font-weight: var(--font-weight-main);
+  font-family: var(--font-family-main);
+}
+
+@mixin font_bold {
+  font-weight: var(--font-weight-bold);
+  font-family: var(--font-family-main);
+}
+
+@mixin font_semibold {
+  font-weight: var(--font-weight-mid);
+  font-family: var(--font-family-main);
+}
+
+@mixin font_atomic {
+  font-weight: normal;
+  font-style: normal;
+  font-family: "Atomic Marker";
+}
+
+@mixin font_atomic_extras {
+  font-weight: normal;
+  font-style: normal;
+  font-family: "Atomic Marker Extras";
+}
+
+@mixin font_atomic_extras_two {
+  font-weight: normal;
+  font-style: normal;
+  font-family: "Atomic Marker Extras Two";
+}

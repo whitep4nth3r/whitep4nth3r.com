@@ -1,0 +1,29 @@
+---
+import Layout from "@layouts/Layout.astro";
+import type { OpenGraphData } from "../../types";
+import { OpenGraphGenerator } from "@src/utils/openGraphGenerator";
+
+const pageTitle = "Blogs posts, quick tips and tutorials";
+
+const openGraphImageUrl = await OpenGraphGenerator.generateImageUrl(pageTitle);
+
+const openGraphData: OpenGraphData = {
+  url: "https://whitep4nth3r.com/",
+  imageAlt: OpenGraphGenerator.generateImageAlt(pageTitle),
+  imageUrl: openGraphImageUrl,
+  imageWidth: OpenGraphGenerator.imgWidth,
+  imageHeight: OpenGraphGenerator.imgHeight,
+};
+
+//todo WILL BE PAGINATED
+---
+
+<Layout
+  title={pageTitle}
+  canonical="https://whitep4nth3r.com"
+  metaDescription="Salma Alam-Naylor writes code for your entertainment, blog posts, tutorial and quick tips on web dev."
+  openGraph={openGraphData}
+  activeNav="blog"
+>
+  <h1>blog index page with correct meta data in the head</h1>
+</Layout>

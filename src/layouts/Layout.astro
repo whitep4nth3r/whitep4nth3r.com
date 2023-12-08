@@ -1,5 +1,6 @@
 ---
 import Header from "@components/Header.astro";
+import { ViewTransitions } from "astro:transitions";
 import type { OpenGraphData } from "@src/types.ts";
 
 interface Props {
@@ -8,9 +9,11 @@ interface Props {
   openGraph: OpenGraphData;
   pageType?: string;
   canonical?: string;
+  activeNav: string;
 }
 
-const { openGraph, pageType, title, metaDescription, canonical } = Astro.props;
+const { openGraph, pageType, title, metaDescription, canonical, activeNav } =
+  Astro.props;
 
 const timeToRead = `${openGraph.timeToRead} minutes`;
 ---
@@ -20,7 +23,7 @@ const timeToRead = `${openGraph.timeToRead} minutes`;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="view-transition" content="same-origin" />
+    <ViewTransitions />
     <title>{title}</title>
     <meta name="description" content={metaDescription} />
 
@@ -101,9 +104,14 @@ const timeToRead = `${openGraph.timeToRead} minutes`;
     <meta name="generator" content={Astro.generator} />
   </head>
   <body data-type={pageType}>
-    <Header />
+    <Header activeNav={activeNav} />
     <main id="main_content">
       <slot />
     </main>
+    <style lang="scss" is:global>
+      @import "@styles/_font.scss";
+      @import "@styles/_root.scss";
+      @import "@styles/_reset.scss";
+    </style>
   </body>
 </html>

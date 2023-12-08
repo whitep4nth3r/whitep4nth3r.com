@@ -14,7 +14,7 @@ export const OpenGraphGenerator = {
     return encodeURIComponent(text).replace(/%(23|2C|2F|3F|5C)/g, "%25$1");
   },
   generateImageAlt: function (pageTitle) {
-    return `Salma Alam-Naylor, ${pageTitle}.`;
+    return `${pageTitle} — Salma Alam-Naylor`;
   },
   generateImageUrl: async function (title) {
     // let fallbackTopics = [];
