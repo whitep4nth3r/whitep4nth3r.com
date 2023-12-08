@@ -1,0 +1,34 @@
+---
+const { image } = Astro.props;
+
+const avifSrcset = `${image.url}?q=75&w=500&fm=avif 500w, ${image.url}?q=75&w=900&fm=avif 900w`;
+const webpSrcset = `${image.url}?q=75&w=500&fm=webp 500w, ${image.url}?q=75&w=900&fm=webp 900w`;
+const imgSrc = `${image.url}?w=400&q=75`;
+---
+
+<picture>
+  <source
+    type="image/avif"
+    srcset={avifSrcset}
+    sizes="(max-width: 735px) 100vw, 736px"
+  />
+  <source
+    type="image/webp"
+    srcset={webpSrcset}
+    sizes="(max-width: 735px) 100vw, 736px"
+  />
+  <img
+    src={imgSrc}
+    alt={image.description}
+    height={image.height}
+    width={image.width}
+  />
+</picture>
+
+<style>
+  * {
+    height: calc(100% - 6.5rem);
+    object-fit: cover;
+    border-radius: var(--border-radius-base);
+  }
+</style>

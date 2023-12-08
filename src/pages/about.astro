@@ -1,3 +1,61 @@
 ---
+import Layout from "@layouts/Layout.astro";
+import type { OpenGraphData } from "../types";
+import { OpenGraphGenerator } from "@utils/openGraphGenerator";
+import { ContentfulPerson } from "@lib/contentfulPerson";
+import BioImage from "@components/BioImage.astro";
+import NameLogo from "@components/NameLogo.astro";
+import TabbedBio from "@components/TabbedBio.astro";
 
+const pageTitle = "About Salma Alam-Naylor";
+const pageUrl = "https://whitep4nth3r.com/about/";
+
+const openGraphImageUrl = await OpenGraphGenerator.generateImageUrl(pageTitle);
+
+const openGraphData: OpenGraphData = {
+  url: pageUrl,
+  imageAlt: OpenGraphGenerator.generateImageAlt(pageTitle),
+  imageUrl: openGraphImageUrl,
+  imageWidth: OpenGraphGenerator.imgWidth,
+  imageHeight: OpenGraphGenerator.imgHeight,
+};
+
+const person = await ContentfulPerson.get();
 ---
+
+<Layout
+  title={pageTitle}
+  canonical={pageUrl}
+  metaDescription="Salma writes code for your entertainment. She's a live streamer, software engineer, and developer educator, and helps developers build cool stuff on the web."
+  openGraph={openGraphData}
+  activeNav="about"
+  pageType="about"
+>
+  <div class="about">
+    <div class="about__image">
+      <div class="about__fixed">
+        <BioImage image={person.imageBio} />
+      </div>
+    </div>
+
+    <div class="about__details">
+      <div class="about__name">
+        <h1>
+          <NameLogo />
+        </h1>
+      </div>
+      <div class="about__bio">
+        <TabbedBio
+          shortBio={person.bioShort}
+          speakerBio={person.bioSpeaker}
+          longBio={person.bioLong}
+        />
+      </div>
+    </div>
+  </div>
+
+  <style lang="scss">
+    @import "@styles/_tc_layout.scss";
+    @import "@styles/_about.scss";
+  </style>
+</Layout>

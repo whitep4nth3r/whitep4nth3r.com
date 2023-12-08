@@ -1,7 +1,7 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import type { OpenGraphData } from "../types";
-import { OpenGraphGenerator } from "@src/utils/openGraphGenerator";
+import { OpenGraphGenerator } from "@utils/openGraphGenerator";
 
 const openGraphImageUrl = await OpenGraphGenerator.generateImageUrl(
   "Live streamer, software engineer and developer educator",

@@ -1,0 +1,35 @@
+---
+import SocialLinks from "@components/SocialLinks.astro";
+import markdownit from "markdown-it";
+const md = markdownit();
+
+const { shortBio, speakerBio, longBio } = Astro.props;
+---
+
+<div class="bio">
+  <div class="bio__topRow">
+    <div class="bio__buttons">
+      <a href="#speaker" class="bio__button">Speaker bio</a>
+      <a href="#long" class="bio__button" data-view="long">Long bio</a>
+    </div>
+    <div class="bio__links">
+      <SocialLinks />
+    </div>
+  </div>
+
+  <div class="bio__block">
+    <Fragment set:html={md.render(shortBio)} />
+  </div>
+  <div class="bio__block">
+    <h2 id="speaker">Speaker bio</h2>
+    <Fragment set:html={md.render(speakerBio)} />
+  </div>
+  <div class="bio__block">
+    <h2 id="long">Long bio</h2>
+    <!-- ${longBio} -->
+  </div>
+</div>
+
+<style lang="scss">
+  @import "@styles/_bio.scss";
+</style>
