@@ -1,5 +1,6 @@
 ---
 import SocialLinks from "@components/SocialLinks.astro";
+import RichText from "@components/RichText.astro";
 import markdownit from "markdown-it";
 const md = markdownit();
 
@@ -26,7 +27,7 @@ const { shortBio, speakerBio, longBio } = Astro.props;
   </div>
   <div class="bio__block">
     <h2 id="long">Long bio</h2>
-    <!-- ${longBio} -->
+    <RichText body={longBio} />
   </div>
 </div>
 

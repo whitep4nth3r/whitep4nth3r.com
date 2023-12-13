@@ -1,0 +1,66 @@
+---
+import markdownit from "markdown-it";
+const md = markdownit();
+
+const { title, content, emoji = "💡" } = Astro.props;
+---
+
+<div class="callout">
+  <h3 class="callout__title">${emoji} ${title}</h3>
+  <div class="callout__content">
+    <Fragment set:html={md.render(content)} />
+  </div>
+</div>
+
+<style lang="scss">
+  @import "@styles/font.scss";
+
+  .callout {
+    padding: 1rem;
+    border-radius: 0.75rem;
+    border: 0.25rem solid var(--post-hr-color);
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .callout__title {
+    @include font_bold;
+    font-size: 1.4rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    color: var(--color-fg);
+  }
+
+  .callout__content {
+    @include font_main;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: var(--color-fg);
+    word-break: break-word;
+  }
+
+  .callout__content p:not(:last-of-type) {
+    margin-bottom: 1rem;
+  }
+
+  .callout__content blockquote {
+    margin-inline-start: 1rem;
+  }
+
+  .callout__content blockquote p {
+    @include font_semibold;
+    margin-bottom: 1.75rem;
+    font-size: 1.4rem;
+    line-height: 1.7;
+  }
+
+  .callout__content blockquote:before {
+    content: '"';
+    @include font_atomic;
+    color: var(--orange);
+    font-size: 10rem;
+    line-height: 0;
+    position: relative;
+    top: 4rem;
+  }
+</style>
