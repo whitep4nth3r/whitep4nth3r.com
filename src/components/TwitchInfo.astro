@@ -1,0 +1,164 @@
+---
+export const prerender = false;
+
+import PlayIcon from "@icons/Play.astro";
+
+const getVodButtonText = (latestVodDateCreated) => {
+  const today = new Date();
+  const createdOn = new Date(latestVodDateCreated);
+  const msInDay = 24 * 60 * 60 * 1000;
+
+  createdOn.setHours(0, 0, 0, 0);
+  today.setHours(0, 0, 0, 0);
+
+  const diff = (+today - +createdOn) / msInDay;
+  let text;
+
+  if (diff === 0) {
+    text = "Earlier today";
+  } else if (diff === 1) {
+    text = "Yesterday";
+  } else {
+    text = `${diff} days ago`;
+  }
+
+  return text;
+};
+
+const accessTokenFetchUrl = `https://id.twitch.tv/oauth2/token?client_id=${
+  import.meta.env.TWITCH_CLIENT_ID
+}&client_secret=${
+  import.meta.env.TWITCH_CLIENT_SECRET
+}&grant_type=client_credentials&scope=user_read`;
+const twitchId = "469006291";
+
+let tokenInMemory = null;
+
+const TwitchApi = {
+  getAccessToken: async function () {
+    try {
+      const response = await fetch(accessTokenFetchUrl, {
+        method: "POST",
+        headers: { accept: "application/vnd.twitchtv.v5+json" },
+      });
+      const token = await response.json();
+      tokenInMemory = token;
+
+      return token;
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  getfetchOptions: function (tokenResponse) {
+    return {
+      headers: {
+        "Client-Id": import.meta.env.TWITCH_CLIENT_ID,
+        Authorization: `Bearer ${tokenResponse.access_token}`,
+      },
+    };
+  },
+  getStreams: async function () {
+    const tokenResponse =
+      tokenInMemory !== null ? tokenInMemory : await TwitchApi.getAccessToken();
+    if (tokenResponse.access_token) {
+      const streamsResponse = await fetch(
+        `https://api.twitch.tv/helix/streams?user_id=${twitchId}`,
+        TwitchApi.getfetchOptions(tokenResponse),
+      );
+
+      if (streamsResponse.status !== 200) {
+        return null;
+      }
+
+      const streams = await streamsResponse.json();
+      return streams;
+    }
+  },
+  getVods: async function () {
+    const tokenResponse =
+      tokenInMemory !== null ? tokenInMemory : await TwitchApi.getAccessToken();
+    if (tokenResponse.access_token) {
+      const vodsResponse = await fetch(
+        `https://api.twitch.tv/helix/videos?user_id=${twitchId}&type=archive&first=1`,
+        TwitchApi.getfetchOptions(tokenResponse),
+      );
+
+      if (vodsResponse.status !== 200) {
+        return null;
+      }
+
+      const vods = await vodsResponse.json();
+      return vods;
+    }
+  },
+};
+
+const imageSizeOffline = "998x556";
+const imageSizeOnline = "998x499";
+
+const streams = await TwitchApi.getStreams();
+const vods = await TwitchApi.getVods();
+
+let title;
+let url;
+let thumb_url;
+let thumb_height;
+let thumb_width;
+let button_text;
+
+const isLive = streams !== null && streams.data.length === 1;
+
+if (isLive) {
+  const currentStream = streams.data[0];
+  title = currentStream.title;
+  url = "https://twitch.tv/whitep4nth3r";
+  thumb_url = currentStream.thumbnail_url.replace(
+    "{width}x{height}",
+    imageSizeOnline,
+  );
+  thumb_height = "1080";
+  thumb_width = "2160";
+  button_text = "Live now";
+} else {
+  const latestVod = vods.data[0];
+  title = latestVod.title;
+  url = latestVod.url;
+  thumb_height = "1920";
+  thumb_width = "1080";
+  thumb_url = !latestVod.thumbnail_url.includes("processing")
+    ? latestVod.thumbnail_url.replace("%{width}x%{height}", imageSizeOffline)
+    : "/img/stream_thumb_fallback.jpg";
+  button_text = getVodButtonText(latestVod.created_at);
+}
+---
+
+<div class="twitchInfo" data-live={isLive ? "true" : "false"}>
+  <a href={url} class="twitchInfo__link">
+    <div class="twitchInfo__deets">
+      <span class="twitchInfo__streamTitleContainer">
+        <p class="twitchInfo__streamTitle">
+          {title}
+        </p>
+      </span>
+      <p
+        class={`twitchInfo__live${!isLive ? ` twitchInfo__live--offline` : ""}`}
+      >
+        {button_text}
+        <PlayIcon />
+      </p>
+    </div>
+    <img
+      src={thumb_url}
+      alt="stream screenshot"
+      class={`twitchInfo__thumbnail${
+        isLive ? ` twitchInfo__thumbnail--live` : ""
+      }`}
+      height={thumb_height}
+      width={thumb_width}
+    />
+  </a>
+</div>
+
+<style lang="scss">
+  @import "@styles/twitch-info.scss";
+</style>

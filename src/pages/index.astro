@@ -1,7 +1,12 @@
 ---
 import Layout from "@layouts/Layout.astro";
+import HomeAbout from "@components/HomeAbout.astro";
+import TwitchInfo from "@components/TwitchInfo.astro";
+import NewsletterSignup from "@components/NewsletterSignup.astro";
 import type { OpenGraphData } from "../types";
 import { OpenGraphGenerator } from "@utils/openGraphGenerator";
+import { ContentfulPerson } from "@lib/contentfulPerson";
+const person = await ContentfulPerson.get();
 
 const openGraphImageUrl = await OpenGraphGenerator.generateImageUrl(
   "Live streamer, software engineer and developer educator",
@@ -26,5 +31,35 @@ const openGraphData: OpenGraphData = {
   openGraph={openGraphData}
   activeNav="home"
 >
-  <h1>home page with correct meta data in the head</h1>
+  <section class="home">
+    <div class="home__left">
+      <div class="home__fixed">
+        <HomeAbout bio={person.bioShort} />
+      </div>
+    </div>
+
+    <div class="home__scroll">
+      <div class="home__twitch">
+        <TwitchInfo />
+      </div>
+      <a href="/activity/" class="home__heading">Latest news and activity</a>
+      <div class="home__activity">
+        <div class="card">
+          <div class="card__imageContainer"></div>
+          <div class="card__inner">
+            <NewsletterSignup removeMargin={true}>
+              <span class="card__metaLabel">Newsletter</span>
+            </NewsletterSignup>
+          </div>
+          <!-- ${feedItems.map((item) => ActivityFeedItem({ item })).join("")} -->
+        </div>
+        <!-- <h2 class="home__heading"><a href="/activity/">See more stuff</a></h2> -->
+      </div>
+    </div>
+  </section>
+
+  <style lang="scss">
+    @import "@styles/home.scss";
+    @import "@styles/card.scss";
+  </style>
 </Layout>

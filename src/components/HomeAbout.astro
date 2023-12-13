@@ -1,0 +1,20 @@
+---
+import NameLogo from "@components/NameLogo.astro";
+import markdownit from "markdown-it";
+const md = markdownit();
+
+const { bio } = Astro.props;
+---
+
+<div class="homeAbout">
+  <h1 class="homeAbout__name">
+    <NameLogo />
+  </h1>
+  <div class="homeAbout__bio">
+    <Fragment set:html={md.render(bio)} />
+  </div>
+</div>
+
+<style lang="scss">
+  @import "@styles/home-about.scss";
+</style>
