@@ -1,0 +1,64 @@
+---
+import Layout from "@layouts/Layout.astro";
+import type { OpenGraphData } from "../types";
+import { OpenGraphGenerator } from "@utils/openGraphGenerator";
+import { ContentfulThingsIUse } from "@lib/contentfulThingsIUse";
+import Card from "@components/Card.astro";
+
+const pageTitle = "My desk, streaming gear and coding setup";
+
+const openGraphImageUrl = await OpenGraphGenerator.generateImageUrl(pageTitle);
+const canonicalUrl = "https://whitep4nth3r.com/uses/";
+
+const openGraphData: OpenGraphData = {
+  url: canonicalUrl,
+  imageAlt: OpenGraphGenerator.generateImageAlt(pageTitle),
+  imageUrl: openGraphImageUrl,
+  imageWidth: OpenGraphGenerator.imgWidth,
+  imageHeight: OpenGraphGenerator.imgHeight,
+};
+
+const categories = await ContentfulThingsIUse.getCategories();
+const allThings = await ContentfulThingsIUse.getAll();
+
+const things = {};
+
+for (let i = 0; i < categories.length; i++) {
+  things[categories[i]] = allThings.filter(
+    (thing) => thing.category === categories[i],
+  );
+}
+---
+
+<Layout
+  title={pageTitle}
+  canonical={canonicalUrl}
+  metaDescription="I receive a lot of questions on stream about my setup and what I use. So here's a (probably very incomplete) list."
+  openGraph={openGraphData}
+  pageType="uses"
+>
+  <section class="uses">
+    <h1 class="page__headerTitle">{pageTitle}</h1>
+    {
+      categories.map((cat) => (
+        <section id={cat}>
+          <h2 class="uses_catHeading">
+            <img src={`/img/${cat.replace(" ", "-")}.png`} alt={cat} />
+          </h2>
+          <ol class="uses__list">
+            {things[cat].map((thing) => (
+              <li>
+                <Card item={{ ...thing, type: "thing" }} />
+              </li>
+            ))}
+          </ol>
+        </section>
+      ))
+    }
+  </section>
+</Layout>
+
+<style lang="scss">
+  @import "@styles/uses.scss";
+  @import "@styles/page.scss";
+</style>

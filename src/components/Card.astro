@@ -83,7 +83,7 @@ const hasOnwardLink = href !== "";
       <div class="card__inner">
         <CardDate date={item.date} type={item.type} />
         <h2 class="card__title">{heading}</h2>
-        <CardDescription content={content} />
+        {item.type !== "thing" && <CardDescription content={content} />}
         {showType === false ? (
           <CardMeta
             type={item.type}

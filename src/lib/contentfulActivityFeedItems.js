@@ -3,7 +3,7 @@ import { ContentfulEvents } from "@lib/contentfulEvents";
 import { GraphQLStringBlocks } from "@lib/graphQLStringBlocks";
 import { ContentfulBlogPosts } from "@lib/contentfulBlogPosts";
 import { ContentfulTalks } from "@lib/contentfulTalks";
-import { DateUtils } from "@lib/dateUtils";
+import { DateUtils } from "@utils/dateUtils";
 
 export const ContentfulActivityFeedItems = {
   getAll: async function () {
