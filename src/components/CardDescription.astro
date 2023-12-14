@@ -1,0 +1,8 @@
+---
+import markdownit from "markdown-it";
+const md = markdownit();
+
+const { content } = Astro.props;
+---
+
+<div class="card__description"><Fragment set:html={md.render(content)} /></div>

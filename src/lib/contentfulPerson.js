@@ -1,5 +1,5 @@
 import { ContentfulApi } from "@lib/contentfulApi";
-import { GraphQLStringBlocks } from "./graphQLStringBlocks.js";
+import { GraphQLStringBlocks } from "@lib/graphQLStringBlocks.js";
 
 export const ContentfulPerson = {
   get: async function () {

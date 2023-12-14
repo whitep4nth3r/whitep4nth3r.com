@@ -1,0 +1,107 @@
+---
+import CardImage from "@components/CardImage.astro";
+import CardDescription from "@components/CardDescription.astro";
+import CardDate from "@components/CardDate.astro";
+import CardMeta from "@components/CardMeta.astro";
+import CardType from "@components/CardType.astro";
+
+function findImage(item) {
+  switch (item.type) {
+    case "post":
+      return item.featuredImage;
+    case "talk":
+      return item.screenshot || item.speakerDeckLink.image;
+    default:
+      return item.image;
+  }
+}
+
+const activityType = {
+  award: "Award",
+  event: "Event",
+  link: "Misc.",
+  podcast: "Podcast",
+  post: "Blog",
+  talk: "Talk",
+  youtube: "YouTube",
+};
+
+const getHref = (item) => {
+  if (item.type === "talk") {
+    return `/talks/${item.slug}/`;
+  }
+
+  if (item.type === "post") {
+    return `/blog/${item.slug}/`;
+  }
+
+  if (item.link) {
+    return item.link;
+  }
+
+  return "";
+};
+
+const { item, showType = true } = Astro.props;
+const heading = item.title || item.name;
+const foundImage = findImage(item);
+const content = item.description || item.excerpt;
+
+const href = getHref(item);
+const hasOnwardLink = href !== "";
+---
+
+{
+  hasOnwardLink && (
+    <a href={href} class="card" aria-label={heading}>
+      {foundImage && <CardImage image={foundImage} type={item.type} />}
+      <div class="card__inner">
+        <CardDate date={item.date} type={item.type} />
+        <h2 class="card__title">{heading}</h2>
+        <CardDescription content={content} />
+        {showType === false ? (
+          <CardMeta
+            type={item.type}
+            label={item.topicsCollection.items[0].name}
+            duration={item.type === "post" ? item.readingTime : item.watchTime}
+          />
+        ) : (
+          <CardType
+            name={
+              item.type === "thing" ? item.category : activityType[item.type]
+            }
+          />
+        )}
+      </div>
+    </a>
+  )
+}
+{
+  !hasOnwardLink && (
+    <div class="card">
+      {foundImage && <CardImage image={foundImage} type={item.type} />}
+      <div class="card__inner">
+        <CardDate date={item.date} type={item.type} />
+        <h2 class="card__title">{heading}</h2>
+        <CardDescription content={content} />
+        {showType === false ? (
+          <CardMeta
+            type={item.type}
+            label={item.topicsCollection.items[0].name}
+            duration={item.type === "post" ? item.readingTime : item.watchTime}
+          />
+        ) : (
+          <CardType
+            name={
+              item.type === "thing" ? item.category : activityType[item.type]
+            }
+          />
+        )}
+      </div>
+    </div>
+  )
+}
+
+<style lang="scss" is:global>
+  @import "@styles/card.scss";
+</style>

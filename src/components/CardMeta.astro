@@ -1,0 +1,9 @@
+---
+const { type, label, duration } = Astro.props;
+const labelSuffix = type === "post" ? "min read" : "watch time";
+---
+
+<div class="card__meta">
+  <span class="card__metaLabel">{label}</span>
+  <span class="card__metaRead">{duration} {labelSuffix} →</span>
+</div>

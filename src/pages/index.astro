@@ -3,10 +3,14 @@ import Layout from "@layouts/Layout.astro";
 import HomeAbout from "@components/HomeAbout.astro";
 import TwitchInfo from "@components/TwitchInfo.astro";
 import NewsletterSignup from "@components/NewsletterSignup.astro";
+import Card from "@components/Card.astro";
 import type { OpenGraphData } from "../types";
 import { OpenGraphGenerator } from "@utils/openGraphGenerator";
 import { ContentfulPerson } from "@lib/contentfulPerson";
+import { getActivityFeed } from "@lib/contentfulActivityFeedItems";
+
 const person = await ContentfulPerson.get();
+const activityFeedItems = await getActivityFeed(9);
 
 const openGraphImageUrl = await OpenGraphGenerator.generateImageUrl(
   "Live streamer, software engineer and developer educator",
@@ -51,9 +55,8 @@ const openGraphData: OpenGraphData = {
               <span class="card__metaLabel">Newsletter</span>
             </NewsletterSignup>
           </div>
-          <!-- ${feedItems.map((item) => ActivityFeedItem({ item })).join("")} -->
         </div>
-        <!-- <h2 class="home__heading"><a href="/activity/">See more stuff</a></h2> -->
+        {activityFeedItems.map((item) => <Card item={item} />)}
       </div>
     </div>
   </section>

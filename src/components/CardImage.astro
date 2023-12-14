@@ -1,0 +1,20 @@
+---
+const { image, itemType } = Astro.props;
+const imageClassModifier =
+  itemType === "thing" ? " card__imageContainer--large" : "";
+---
+
+<div class={`card__imageContainer${imageClassModifier}`}>
+  <picture>
+    <source type="image/avif" srcset={`${image.url}?w=510&fm=avif`} />
+    <source type="image/webp" srcset={`${image.url}?w=510&fm=webp`} />
+    <img
+      src={`${image.url}?w=510`}
+      alt=""
+      role="presentation"
+      height={image.height}
+      width={image.width}
+      class="card__image"
+    />
+  </picture>
+</div>

@@ -1,0 +1,10 @@
+---
+import { DateUtils } from "@lib/dateUtils";
+const { date, type } = Astro.props;
+---
+
+{
+  type !== "thing" && (
+    <p class="card__date">{DateUtils.formatDateForDisplay(date)}</p>
+  )
+}

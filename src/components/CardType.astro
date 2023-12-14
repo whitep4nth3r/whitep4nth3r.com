@@ -1,0 +1,15 @@
+---
+function formatCategoryName(name) {
+  if (name === "pc components") {
+    return "PC Components";
+  }
+
+  return name;
+}
+
+const { name } = Astro.props;
+
+const displayName = formatCategoryName(name);
+---
+
+<span class="card__metaLabel">{displayName}</span>
