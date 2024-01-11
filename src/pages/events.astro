@@ -1,12 +1,16 @@
 ---
 export const prerender = false;
 
+//todo — check that timezone is not UTC and it is correct at GMT
+
 import Layout from "@layouts/Layout.astro";
 import type { OpenGraphData } from "../types";
 import { OpenGraphGenerator } from "@utils/openGraphGenerator";
 import { Twitch } from "@lib/twitch";
 import { ContentfulEvents } from "@lib/contentfulEvents";
 import { DateUtils } from "@utils/dateUtils";
+import TwitchIcon from "@icons/Twitch.astro";
+import YouTubeIcon from "@icons/YouTube.astro";
 
 const { geo } = Astro.locals.netlify.context;
 
@@ -134,7 +138,8 @@ if (twitchSchedule !== null) {
                 target="_blank"
                 rel="nofollow noreferrer"
               >
-                CALCULATE ICON Go to
+                {event.type === "youtube" ? <YouTubeIcon /> : ""}
+                {event.type === "twitch" ? <TwitchIcon /> : ""} Go to
                 <span class="events__listItemCta--sr">{event.name}</span> event
               </a>
             ) : (
