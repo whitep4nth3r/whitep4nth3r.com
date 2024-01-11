@@ -1,4 +1,16 @@
 export const DateUtils = {
+  localiseTime({ dateString, locale, timezone }) {
+    const date = new Date(dateString);
+    return date.toLocaleString(locale, {
+      timeZone: timezone,
+      timeZoneName: "short",
+      hour: "numeric",
+      minute: "numeric",
+      day: "numeric",
+      weekday: "short",
+      month: "short",
+    });
+  },
   sortItemsByDateAsc(a, b) {
     const a_timestamp = Date.parse(a.date);
     const a_date = new Date(a_timestamp);

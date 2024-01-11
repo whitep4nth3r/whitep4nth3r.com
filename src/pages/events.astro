@@ -1,0 +1,158 @@
+---
+export const prerender = false;
+
+import Layout from "@layouts/Layout.astro";
+import type { OpenGraphData } from "../types";
+import { OpenGraphGenerator } from "@utils/openGraphGenerator";
+import { Twitch } from "@lib/twitch";
+import { ContentfulEvents } from "@lib/contentfulEvents";
+import { DateUtils } from "@utils/dateUtils";
+
+const { geo } = Astro.locals.netlify.context;
+
+const locale = Astro.request.headers["accept-language"] || "en-GB";
+
+function removeTwitchStreamsWhenOnVacation(events, startTime, endTime) {
+  return events.filter((ev) => ev.date < startTime || ev.date > endTime);
+}
+
+const pageTitle = "Live streams, conferences and events";
+const pageUrl = "https://whitep4nth3r.com/events/";
+
+const openGraphImageUrl = await OpenGraphGenerator.generateImageUrl(pageTitle);
+
+const openGraphData: OpenGraphData = {
+  url: pageUrl,
+  imageAlt: OpenGraphGenerator.generateImageAlt(pageTitle),
+  imageUrl: openGraphImageUrl,
+  imageWidth: OpenGraphGenerator.imgWidth,
+  imageHeight: OpenGraphGenerator.imgHeight,
+};
+
+let sortedEvents;
+
+const futureEvents = await ContentfulEvents.getAll({ future: true });
+
+const dbEvents = futureEvents.map((ev) => {
+  return {
+    ...ev,
+    type: ev.link?.includes("youtube") ? "youtube" : "db",
+    canceled_until: null,
+  };
+});
+
+const twitchSchedule = await Twitch.getSchedule();
+
+if (twitchSchedule !== null) {
+  const twitchStreams = twitchSchedule.data.segments;
+  const twitchVacation = twitchSchedule.data.vacation;
+
+  const twitchEvents = twitchStreams.map((ev) => {
+    const buffer: unknown = Buffer.from(ev.id, "base64");
+    const segmentInfo = JSON.parse(buffer as string);
+
+    return {
+      ...ev,
+      date: ev.start_time,
+      name: ev.title,
+      link: `https://www.twitch.tv/whitep4nth3r/schedule?segmentID=${segmentInfo.segmentID}`,
+      type: "twitch",
+    };
+  });
+
+  const filteredTwitchEvents =
+    twitchVacation !== null
+      ? removeTwitchStreamsWhenOnVacation(
+          twitchEvents,
+          twitchVacation.start_time,
+          twitchVacation.end_time,
+        )
+      : twitchEvents;
+
+  // join just next 4 streams with all db events
+  const allEvents = dbEvents.concat(
+    filteredTwitchEvents[0],
+    filteredTwitchEvents[1],
+    filteredTwitchEvents[2],
+    filteredTwitchEvents[3],
+  );
+
+  sortedEvents = allEvents.sort(DateUtils.sortItemsByDateAsc);
+} else {
+  sortedEvents = dbEvents;
+}
+---
+
+<Layout
+  title={pageTitle}
+  canonical={pageUrl}
+  metaDescription="View Salma's Twitch schedule, live events and conference schedule."
+  openGraph={openGraphData}
+  pageType="events"
+>
+  <section class="events">
+    <h1 class="page__headerTitle">Upcoming Events and Live Streams</h1>
+
+    <ol class="events__list">
+      {
+        sortedEvents.map((event) => (
+          <li class="events__listItem" data-event-date={event.date}>
+            <time datetime={event.date} class="events__listItemDate">
+              <span class="events__listItemDate__month">
+                {DateUtils.getMonthFromTime(event.date)}
+              </span>
+              <span class="events__listItemDate__day">
+                {DateUtils.getDateFromTime(event.date)}
+              </span>
+            </time>
+            <span class="events__listItemTime">
+              <span class="events__listItemTimeInner">
+                <span>
+                  {DateUtils.localiseTime({
+                    dateString: event.date,
+                    locale,
+                    timezone: geo.timezone,
+                  })}
+                </span>
+              </span>
+              {event.canceled_until !== null ? (
+                <span class="events__listItemCancelled">CANCELLED</span>
+              ) : (
+                ""
+              )}
+            </span>
+            <span class="events__listItemName">{event.name}</span>
+            {event.description ? (
+              <p class="events__listshortDescription">{event.description}</p>
+            ) : (
+              ""
+            )}
+            {event.canceled_until === null && event.link ? (
+              <a
+                href={event.link}
+                class="events__listItemCta"
+                target="_blank"
+                rel="nofollow noreferrer"
+              >
+                CALCULATE ICON Go to
+                <span class="events__listItemCta--sr">{event.name}</span> event
+              </a>
+            ) : (
+              ""
+            )}
+          </li>
+        ))
+      }
+    </ol>
+    <a
+      href="https://www.twitch.tv/whitep4nth3r/schedule"
+      class="events__listItemCta events__listItemCta--centered"
+      >View full Twitch schedule</a
+    >
+  </section>
+
+  <style lang="scss">
+    @import "@styles/_page.scss";
+    @import "@styles/_events.scss";
+  </style>
+</Layout>

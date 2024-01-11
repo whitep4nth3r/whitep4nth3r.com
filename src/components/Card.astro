@@ -5,6 +5,16 @@ import CardDate from "@components/CardDate.astro";
 import CardMeta from "@components/CardMeta.astro";
 import CardType from "@components/CardType.astro";
 
+const activityType = {
+  award: "Award",
+  event: "Event",
+  link: "Misc.",
+  podcast: "Podcast",
+  post: "Blog",
+  talk: "Talk",
+  youtube: "YouTube",
+};
+
 function findImage(item) {
   switch (item.type) {
     case "post":
@@ -15,16 +25,6 @@ function findImage(item) {
       return item.image;
   }
 }
-
-const activityType = {
-  award: "Award",
-  event: "Event",
-  link: "Misc.",
-  podcast: "Podcast",
-  post: "Blog",
-  talk: "Talk",
-  youtube: "YouTube",
-};
 
 const getHref = (item) => {
   if (item.type === "talk") {

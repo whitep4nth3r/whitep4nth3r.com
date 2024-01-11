@@ -2,7 +2,7 @@ import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import { fileURLToPath } from "url";
 import path, { dirname } from "path";
-import netlify from "@astrojs/netlify/functions";
+import netlify from "@astrojs/netlify";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -26,5 +26,7 @@ export default defineConfig({
     },
   },
   output: "hybrid",
-  adapter: netlify(),
+  adapter: netlify({
+    edgeMiddleware: true,
+  }),
 });
