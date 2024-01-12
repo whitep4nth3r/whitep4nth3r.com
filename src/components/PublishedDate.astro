@@ -1,0 +1,23 @@
+---
+import { DateUtils } from "@utils/dateUtils";
+
+const { date, readingTime, isTalk, updatedDate } = Astro.props;
+
+const timeSuffix = isTalk ? "watch time" : "read";
+const updated = updatedDate ? "Updated " : "";
+const displayDate = updatedDate || date;
+---
+
+<div class="publishedDate">
+  <p class="publishedDate__item">
+    {updated}
+    {DateUtils.formatDateForDisplay(displayDate)}
+  </p>
+  <p class="publishedDate__item">
+    {readingTime} min {timeSuffix}
+  </p>
+</div>
+
+<style lang="scss">
+  @import "@styles/published-date.scss";
+</style>

@@ -1,0 +1,27 @@
+---
+import BioImage from "@components/BioImage.astro";
+import SocialLinks from "@components/SocialLinks.astro";
+import markdownit from "markdown-it";
+const md = markdownit();
+
+const { author } = Astro.props;
+---
+
+<div class="blogEndAuthor">
+  <div class="blogEndAuthor__imgContainer">
+    <BioImage image={author.imageBio} />
+  </div>
+
+  <div class="blogEndAuthor__bio">
+    <h3 class="blogEndAuthor__name">Salma Alam-Naylor</h3>
+    <Fragment set:html={md.render(author.bioPost)} />
+  </div>
+
+  <div class="blogEndAuthor_social">
+    <SocialLinks />
+  </div>
+</div>
+
+<style lang="scss">
+  @import "@styles/blog-end-author.scss";
+</style>

@@ -1,0 +1,17 @@
+---
+import Card from "@components/Card.astro";
+const { posts } = Astro.props;
+---
+
+<div class="post__related">
+  <div class="post__relatedHeader">
+    <p class="post__relatedHeaderTitle">Related posts</p>
+  </div>
+  <div class="post__relatedGrid">
+    {
+      posts.map((post) => (
+        <Card item={{ ...post, type: "post" }} showType={false} />
+      ))
+    }
+  </div>
+</div>

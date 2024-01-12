@@ -1,0 +1,16 @@
+---
+import WavyCheck from "@icons/WavyCheck.astro";
+const { url } = Astro.props;
+
+const displayUrl = new URL(url).hostname;
+---
+
+<a
+  class="post__externalUrl"
+  href={url}
+  target="_blank"
+  rel="nofollow noreferrer"
+>
+  <span class="post__externalUrlIcon"><WavyCheck /></span>
+   Originally posted on {displayUrl}
+</a>

@@ -1,0 +1,27 @@
+---
+import BioImage from "@components/BioImage.astro";
+import SocialLinks from "@components/SocialLinks.astro";
+import NameLogo from "@components/NameLogo.astro";
+const { author, hideOnSmallScreens } = Astro.props;
+
+const hideClass = hideOnSmallScreens ? " author--hideSmall" : "";
+---
+
+<div class=`author${hideClass}`>
+  <a href="/about/" class="author__cta" aria-label="About Salma">
+    <div class="author__imgContainer">
+      <BioImage image={author.imageBio} />
+    </div>
+    <div class="author__name">
+      <NameLogo />
+    </div>
+  </a>
+
+  <div class="author_social">
+    <SocialLinks />
+  </div>
+
+  <style lang="scss">
+    @import "@styles/author.scss";
+  </style>
+</div>

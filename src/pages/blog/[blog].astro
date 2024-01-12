@@ -1,6 +1,23 @@
 ---
+import Layout from "@layouts/Layout.astro";
+import PublishedDate from "@components/PublishedDate.astro";
+import Author from "@components/Author.astro";
+import NewsletterSignup from "@components/NewsletterSignup.astro";
+import TableOfContents from "@components/TableOfContents.astro";
+import IsSponsored from "@components/IsSponsored.astro";
+import ExternalUrl from "@components/ExternalUrl.astro";
+import BlogEndAuthor from "@components/BlogEndAuthor.astro";
+import BlogRelatedPosts from "@components/BlogRelatedPosts.astro";
+import OutOfDateWarning from "@components/OutOfDateWarning.astro";
+import RichText from "@components/RichText.astro";
 import { ContentfulBlogPosts } from "@lib/contentfulBlogPosts";
+import { Tools } from "@lib/tools";
 import type { BlogPost } from "@lib/contentfulTypes";
+import type { OpenGraphData } from "@lib/types";
+import { OpenGraphGenerator } from "@utils/openGraphGenerator";
+
+import markdownit from "markdown-it";
+const md = markdownit();
 
 export async function getStaticPaths() {
   const blogPosts: BlogPost[] = await ContentfulBlogPosts.getAll();
@@ -14,7 +31,83 @@ export async function getStaticPaths() {
 }
 
 const post = Astro.props;
+
+const openGraphImageUrl = await OpenGraphGenerator.generateImageUrl(post.title);
+const pageUrl = `https://whitep4nth3r.com/blog/${post.slug}/`;
+
+const openGraphData: OpenGraphData = {
+  url: pageUrl,
+  imageAlt: OpenGraphGenerator.generateImageAlt(post.title),
+  imageUrl: openGraphImageUrl,
+  imageWidth: OpenGraphGenerator.imgWidth,
+  imageHeight: OpenGraphGenerator.imgHeight,
+};
 ---
 
-{post.title}
-{post.author.name}
+<Layout
+  title={post.title}
+  canonical={pageUrl}
+  metaDescription="Salma writes code for your entertainment. She's a live streamer, software engineer, and developer educator, and helps developers build cool stuff on the web."
+  openGraph={openGraphData}
+  activeNav="about"
+  pageType="about"
+>
+  {/* use middleware for referrer? */}
+  <aside data-referer data-slug={post.slug} data-title={post.title}></aside>
+  <div class="post__meta">
+    <p class="post__meta__topic">{post.topicsCollection.items[0].name}</p>
+    <PublishedDate
+      date={post.date}
+      readingTime={post.readingTime}
+      isTalk={false}
+      updatedDate={post.updatedDate}
+    />
+  </div>
+  <h1 class="post__h1">{post.title}</h1>
+  <section class="post">
+    <aside class="post__aside">
+      <div class="post__authorContainer">
+        <Author author={post.author} hideOnSmallScreens={true} />
+      </div>
+      <div class="post__asideStickyGroup">
+        <span class="post__newsletterSignupWide">
+          <NewsletterSignup removeMargin={false} />
+        </span>
+        <TableOfContents postBody={post.body} />
+      </div>
+    </aside>
+    <article class="post__article">
+      <div class="post__excerpt">
+        <Fragment set:html={md.render(post.excerpt)} />
+      </div>
+      <hr class="post__separator" aria-hidden="true" />
+      <div class="post__body">
+        {!post.hideOutOfDateWarning && <OutOfDateWarning date={post.date} />}
+        <RichText body={post.body} />
+      </div>
+      {post.isSponsored && <IsSponsored />}
+      {post.externalUrl && <ExternalUrl url={post.externalUrl} />}
+      <span class="post__newsletterSignupSmall">
+        <NewsletterSignup removeMargin={false} />
+      </span>
+      <hr class="post__separator" />
+      <BlogEndAuthor author={post.author} />
+
+      {
+        post.relatedPostsCollection?.items.length && (
+          <BlogRelatedPosts posts={post.relatedPostsCollection?.items} />
+        )
+      }
+
+      <Fragment
+        set:html={`<script type="application/ld+json">
+            ${Tools.structuredPostData({ post, imageUrl: openGraphImageUrl })}
+          </script>`}
+      />
+    </article>
+  </section>
+
+  <style lang="scss">
+    @import "@styles/post.scss";
+  </style>
+</Layout>

@@ -1,0 +1,24 @@
+---
+export const prerender = false;
+
+const { date } = Astro.props;
+
+const today = new Date();
+const createdOn = new Date(date);
+const msInDay = 24 * 60 * 60 * 1000;
+
+createdOn.setHours(0, 0, 0, 0);
+today.setHours(0, 0, 0, 0);
+
+const diff = (+today - +createdOn) / msInDay;
+const outOfDate = diff > 730;
+---
+
+{
+  outOfDate && (
+    <p class="post__outOfDate">
+      ⚠️ This post is over two years old and may contain some outdated technical
+      information. Please proceed with caution!
+    </p>
+  )
+}
