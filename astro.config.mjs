@@ -8,8 +8,13 @@ const __dirname = dirname(__filename);
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://whitep4nth3r.com",
+  adapter: netlify({
+    edgeMiddleware: true,
+  }),
   integrations: [sitemap()],
+  output: "hybrid",
+  site: "https://whitep4nth3r.com",
+  trailingSlash: "always",
   vite: {
     resolve: {
       alias: {
@@ -25,8 +30,4 @@ export default defineConfig({
       },
     },
   },
-  output: "hybrid",
-  adapter: netlify({
-    edgeMiddleware: true,
-  }),
 });

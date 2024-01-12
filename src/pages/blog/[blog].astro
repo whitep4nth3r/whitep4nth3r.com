@@ -1,0 +1,22 @@
+---
+import { ContentfulBlogPosts } from "@lib/contentfulBlogPosts";
+
+export async function getStaticPaths() {
+  const blogPosts: any = await ContentfulBlogPosts.getAll();
+
+  console.log(blogPosts);
+
+  const pages = blogPosts.map((item) => ({
+    params: { blog: item.slug },
+    props: {
+      post: item,
+    },
+  }));
+  return pages;
+}
+
+//todo — do types?
+const { post }: any = Astro.props;
+---
+
+{post.title}
