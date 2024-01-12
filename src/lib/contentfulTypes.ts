@@ -258,13 +258,13 @@ export enum ArcadeEmbedOrder {
 export type Asset = {
   __typename?: "Asset";
   contentType?: Maybe<Scalars["String"]["output"]>;
-  contentfulMetadata: ContentfulMetadata;
+  contentfulMetadata?: ContentfulMetadata;
   description?: Maybe<Scalars["String"]["output"]>;
   fileName?: Maybe<Scalars["String"]["output"]>;
   height?: Maybe<Scalars["Int"]["output"]>;
   linkedFrom?: Maybe<AssetLinkingCollections>;
   size?: Maybe<Scalars["Int"]["output"]>;
-  sys: Sys;
+  sys?: Sys;
   title?: Maybe<Scalars["String"]["output"]>;
   url?: Maybe<Scalars["String"]["output"]>;
   width?: Maybe<Scalars["Int"]["output"]>;
