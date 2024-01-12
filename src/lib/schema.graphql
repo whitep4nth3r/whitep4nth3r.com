@@ -1,0 +1,3018 @@
+directive @key(
+  fields: _FieldSet!
+  resolvable: Boolean = true
+) on OBJECT | INTERFACE
+
+directive @requires(fields: _FieldSet!) on FIELD_DEFINITION
+
+directive @provides(fields: _FieldSet!) on FIELD_DEFINITION
+
+directive @external(reason: String) on OBJECT | FIELD_DEFINITION
+
+directive @tag(
+  name: String!
+) on FIELD_DEFINITION | OBJECT | INTERFACE | UNION | ARGUMENT_DEFINITION | SCALAR | ENUM | ENUM_VALUE | INPUT_OBJECT | INPUT_FIELD_DEFINITION
+
+directive @extends on OBJECT | INTERFACE
+
+type Query {
+  asset(id: String!, preview: Boolean, locale: String): Asset
+  assetCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+    where: AssetFilter
+    order: [AssetOrder]
+  ): AssetCollection
+  blogPost(id: String!, preview: Boolean, locale: String): BlogPost
+  blogPostCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+    where: BlogPostFilter
+    order: [BlogPostOrder]
+  ): BlogPostCollection
+  talk(id: String!, preview: Boolean, locale: String): Talk
+  talkCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+    where: TalkFilter
+    order: [TalkOrder]
+  ): TalkCollection
+  arcadeEmbed(id: String!, preview: Boolean, locale: String): ArcadeEmbed
+  arcadeEmbedCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+    where: ArcadeEmbedFilter
+    order: [ArcadeEmbedOrder]
+  ): ArcadeEmbedCollection
+  thingIUse(id: String!, preview: Boolean, locale: String): ThingIUse
+  thingIUseCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+    where: ThingIUseFilter
+    order: [ThingIUseOrder]
+  ): ThingIUseCollection
+  sponsorshipPage(
+    id: String!
+    preview: Boolean
+    locale: String
+  ): SponsorshipPage
+  sponsorshipPageCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+    where: SponsorshipPageFilter
+    order: [SponsorshipPageOrder]
+  ): SponsorshipPageCollection
+  streamPackage(id: String!, preview: Boolean, locale: String): StreamPackage
+  streamPackageCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+    where: StreamPackageFilter
+    order: [StreamPackageOrder]
+  ): StreamPackageCollection
+  testimonial(id: String!, preview: Boolean, locale: String): Testimonial
+  testimonialCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+    where: TestimonialFilter
+    order: [TestimonialOrder]
+  ): TestimonialCollection
+  person(id: String!, preview: Boolean, locale: String): Person
+  personCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+    where: PersonFilter
+    order: [PersonOrder]
+  ): PersonCollection
+  event(id: String!, preview: Boolean, locale: String): Event
+  eventCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+    where: EventFilter
+    order: [EventOrder]
+  ): EventCollection
+  activityFeedItem(
+    id: String!
+    preview: Boolean
+    locale: String
+  ): ActivityFeedItem
+  activityFeedItemCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+    where: ActivityFeedItemFilter
+    order: [ActivityFeedItemOrder]
+  ): ActivityFeedItemCollection
+  codeBlock(id: String!, preview: Boolean, locale: String): CodeBlock
+  codeBlockCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+    where: CodeBlockFilter
+    order: [CodeBlockOrder]
+  ): CodeBlockCollection
+  callout(id: String!, preview: Boolean, locale: String): Callout
+  calloutCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+    where: CalloutFilter
+    order: [CalloutOrder]
+  ): CalloutCollection
+  deployToNetlifyButton(
+    id: String!
+    preview: Boolean
+    locale: String
+  ): DeployToNetlifyButton
+  deployToNetlifyButtonCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+    where: DeployToNetlifyButtonFilter
+    order: [DeployToNetlifyButtonOrder]
+  ): DeployToNetlifyButtonCollection
+  codePenEmbed(id: String!, preview: Boolean, locale: String): CodePenEmbed
+  codePenEmbedCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+    where: CodePenEmbedFilter
+    order: [CodePenEmbedOrder]
+  ): CodePenEmbedCollection
+  lighthouseComparison(
+    id: String!
+    preview: Boolean
+    locale: String
+  ): LighthouseComparison
+  lighthouseComparisonCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+    where: LighthouseComparisonFilter
+    order: [LighthouseComparisonOrder]
+  ): LighthouseComparisonCollection
+  tweetEmbed(id: String!, preview: Boolean, locale: String): TweetEmbed
+  tweetEmbedCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+    where: TweetEmbedFilter
+    order: [TweetEmbedOrder]
+  ): TweetEmbedCollection
+  topic(id: String!, preview: Boolean, locale: String): Topic
+  topicCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+    where: TopicFilter
+    order: [TopicOrder]
+  ): TopicCollection
+  videoEmbed(id: String!, preview: Boolean, locale: String): VideoEmbed
+  videoEmbedCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+    where: VideoEmbedFilter
+    order: [VideoEmbedOrder]
+  ): VideoEmbedCollection
+  speakerDeckLink(
+    id: String!
+    preview: Boolean
+    locale: String
+  ): SpeakerDeckLink
+  speakerDeckLinkCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+    where: SpeakerDeckLinkFilter
+    order: [SpeakerDeckLinkOrder]
+  ): SpeakerDeckLinkCollection
+  entryCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+    where: EntryFilter
+    order: [EntryOrder]
+  ): EntryCollection
+  _entities(representations: [_Any!]!): [_Entity]!
+  _service: _Service!
+}
+
+# Represents a binary file in a space. An asset can be any file type.
+type Asset {
+  sys: Sys!
+  contentfulMetadata: ContentfulMetadata!
+  title(locale: String): String
+  description(locale: String): String
+  contentType(locale: String): String
+  fileName(locale: String): String
+  size(locale: String): Int
+  url(transform: ImageTransformOptions, locale: String): String
+  width(locale: String): Int
+  height(locale: String): Int
+  linkedFrom(allowedLocales: [String]): AssetLinkingCollections
+}
+
+type Sys {
+  id: String!
+  spaceId: String!
+  environmentId: String!
+  publishedAt: DateTime
+  firstPublishedAt: DateTime
+  publishedVersion: Int
+
+  # The locale that was requested - mainly used for Apollo Federation.
+  locale: String
+}
+
+# A date-time string at UTC, such as 2007-12-03T10:15:30Z,
+#     compliant with the 'date-time' format outlined in section 5.6 of
+#     the RFC 3339 profile of the ISO 8601 standard for representation
+#     of dates and times using the Gregorian calendar.
+scalar DateTime
+
+type ContentfulMetadata {
+  tags: [ContentfulTag]!
+}
+
+# Represents a tag entity for finding and organizing content easily.
+#     Find out more here: https://www.contentful.com/developers/docs/references/content-delivery-api/#/reference/content-tags
+type ContentfulTag {
+  id: String
+  name: String
+}
+
+input ImageTransformOptions {
+  # Desired width in pixels. Defaults to the original image width.
+  width: Dimension
+
+  # Desired height in pixels. Defaults to the original image height.
+  height: Dimension
+
+  # Desired quality of the image in percents.
+  #         Used for `PNG8`, `JPG`, `JPG_PROGRESSIVE` and `WEBP` formats.
+  quality: Quality
+
+  # Desired corner radius in pixels.
+  #         Results in an image with rounded corners (pass `-1` for a full circle/ellipse).
+  #         Defaults to `0`. Uses desired background color as padding color,
+  #         unless the format is `JPG` or `JPG_PROGRESSIVE` and resize strategy is `PAD`, then defaults to white.
+  cornerRadius: Int
+
+  # Desired resize strategy. Defaults to `FIT`.
+  resizeStrategy: ImageResizeStrategy
+
+  # Desired resize focus area. Defaults to `CENTER`.
+  resizeFocus: ImageResizeFocus
+
+  # Desired background color, used with corner radius or `PAD` resize strategy.
+  #         Defaults to transparent (for `PNG`, `PNG8` and `WEBP`) or white (for `JPG` and `JPG_PROGRESSIVE`).
+  backgroundColor: HexColor
+
+  # Desired image format. Defaults to the original image format.
+  format: ImageFormat
+}
+
+# The 'Dimension' type represents dimensions as whole numeric values between `1` and `4000`.
+scalar Dimension
+
+# The 'Quality' type represents quality as whole numeric values between `1` and `100`.
+scalar Quality
+
+enum ImageResizeStrategy {
+  # Resizes the image to fit into the specified dimensions.
+  FIT
+
+  # Resizes the image to the specified dimensions, padding the image if needed.
+  #         Uses desired background color as padding color.
+  PAD
+
+  # Resizes the image to the specified dimensions, cropping the image if needed.
+  FILL
+
+  # Resizes the image to the specified dimensions, changing the original aspect ratio if needed.
+  SCALE
+
+  # Crops a part of the original image to fit into the specified dimensions.
+  CROP
+
+  # Creates a thumbnail from the image.
+  THUMB
+}
+
+enum ImageResizeFocus {
+  # Focus the resizing on the center.
+  CENTER
+
+  # Focus the resizing on the top.
+  TOP
+
+  # Focus the resizing on the top right.
+  TOP_RIGHT
+
+  # Focus the resizing on the right.
+  RIGHT
+
+  # Focus the resizing on the bottom right.
+  BOTTOM_RIGHT
+
+  # Focus the resizing on the bottom.
+  BOTTOM
+
+  # Focus the resizing on the bottom left.
+  BOTTOM_LEFT
+
+  # Focus the resizing on the left.
+  LEFT
+
+  # Focus the resizing on the top left.
+  TOP_LEFT
+
+  # Focus the resizing on the largest face.
+  FACE
+
+  # Focus the resizing on the area containing all the faces.
+  FACES
+}
+
+# The 'HexColor' type represents color in `rgb:ffffff` string format.
+scalar HexColor
+
+enum ImageFormat {
+  # JPG image format.
+  JPG
+
+  # Progressive JPG format stores multiple passes of an image in progressively higher detail.
+  #         When a progressive image is loading, the viewer will first see a lower quality pixelated version which
+  #         will gradually improve in detail, until the image is fully downloaded. This is to display an image as
+  #         early as possible to make the layout look as designed.
+  JPG_PROGRESSIVE
+
+  # PNG image format
+  PNG
+
+  # 8-bit PNG images support up to 256 colors and weigh less than the standard 24-bit PNG equivalent.
+  #         The 8-bit PNG format is mostly used for simple images, such as icons or logos.
+  PNG8
+
+  # WebP image format.
+  WEBP
+  AVIF
+}
+
+type AssetLinkingCollections {
+  entryCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+  ): EntryCollection
+  blogPostCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+  ): BlogPostCollection
+  talkCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+  ): TalkCollection
+  thingIUseCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+  ): ThingIUseCollection
+  testimonialCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+  ): TestimonialCollection
+  personCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+  ): PersonCollection
+  eventCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+  ): EventCollection
+  activityFeedItemCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+  ): ActivityFeedItemCollection
+  topicCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+  ): TopicCollection
+  speakerDeckLinkCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+  ): SpeakerDeckLinkCollection
+}
+
+type EntryCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [Entry]!
+}
+
+interface Entry {
+  sys: Sys!
+  contentfulMetadata: ContentfulMetadata!
+}
+
+type BlogPostCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [BlogPost]!
+}
+
+# A blog post [See type definition](https://app.contentful.com/spaces/56dzm01z6lln/content_types/blogPost)
+type BlogPost implements Entry {
+  sys: Sys!
+  contentfulMetadata: ContentfulMetadata!
+  linkedFrom(allowedLocales: [String]): BlogPostLinkingCollections
+  date(locale: String): DateTime
+  hideOutOfDateWarning(locale: String): Boolean
+  updatedDate(locale: String): DateTime
+  title(locale: String): String
+  metaTitle(locale: String): String
+  metaDescription(locale: String): String
+  slug(locale: String): String
+  isSponsored(locale: String): Boolean
+  featuredImage(preview: Boolean, locale: String): Asset
+  author(preview: Boolean, locale: String, where: PersonFilter): Person
+  excerpt(locale: String): String
+  topicsCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+    where: TopicFilter
+    order: [BlogPostTopicsCollectionOrder]
+  ): BlogPostTopicsCollection
+  body(locale: String): BlogPostBody
+  readingTime(locale: String): String
+  externalUrl(locale: String): String
+  relatedPostsCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+    where: BlogPostFilter
+    order: [BlogPostRelatedPostsCollectionOrder]
+  ): BlogPostRelatedPostsCollection
+}
+
+type BlogPostLinkingCollections {
+  entryCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+  ): EntryCollection
+  blogPostCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+    order: [BlogPostLinkingCollectionsBlogPostCollectionOrder]
+  ): BlogPostCollection
+}
+
+enum BlogPostLinkingCollectionsBlogPostCollectionOrder {
+  date_ASC
+  date_DESC
+  hideOutOfDateWarning_ASC
+  hideOutOfDateWarning_DESC
+  updatedDate_ASC
+  updatedDate_DESC
+  title_ASC
+  title_DESC
+  metaTitle_ASC
+  metaTitle_DESC
+  slug_ASC
+  slug_DESC
+  isSponsored_ASC
+  isSponsored_DESC
+  readingTime_ASC
+  readingTime_DESC
+  externalUrl_ASC
+  externalUrl_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+# A person with a name, image, description and social links. [See type definition](https://app.contentful.com/spaces/56dzm01z6lln/content_types/person)
+type Person implements Entry {
+  sys: Sys!
+  contentfulMetadata: ContentfulMetadata!
+  linkedFrom(allowedLocales: [String]): PersonLinkingCollections
+  name(locale: String): String
+  slug(locale: String): String
+  imageBio(preview: Boolean, locale: String): Asset
+  bioPost(locale: String): String
+  bioShort(locale: String): String
+  bioSpeaker(locale: String): String
+  bioLong(locale: String): PersonBioLong
+}
+
+type PersonLinkingCollections {
+  entryCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+  ): EntryCollection
+  blogPostCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+    order: [PersonLinkingCollectionsBlogPostCollectionOrder]
+  ): BlogPostCollection
+  talkCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+    order: [PersonLinkingCollectionsTalkCollectionOrder]
+  ): TalkCollection
+}
+
+enum PersonLinkingCollectionsBlogPostCollectionOrder {
+  date_ASC
+  date_DESC
+  hideOutOfDateWarning_ASC
+  hideOutOfDateWarning_DESC
+  updatedDate_ASC
+  updatedDate_DESC
+  title_ASC
+  title_DESC
+  metaTitle_ASC
+  metaTitle_DESC
+  slug_ASC
+  slug_DESC
+  isSponsored_ASC
+  isSponsored_DESC
+  readingTime_ASC
+  readingTime_DESC
+  externalUrl_ASC
+  externalUrl_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+type TalkCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [Talk]!
+}
+
+# A Speaker Deck link, video and transcript for a talk. [See type definition](https://app.contentful.com/spaces/56dzm01z6lln/content_types/talk)
+type Talk implements Entry {
+  sys: Sys!
+  contentfulMetadata: ContentfulMetadata!
+  linkedFrom(allowedLocales: [String]): TalkLinkingCollections
+  date(locale: String): DateTime
+  title(locale: String): String
+  slug(locale: String): String
+  metaDescription(locale: String): String
+  excerpt(locale: String): String
+  author(preview: Boolean, locale: String, where: PersonFilter): Person
+  screenshot(preview: Boolean, locale: String): Asset
+  topicsCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+    where: TopicFilter
+    order: [TalkTopicsCollectionOrder]
+  ): TalkTopicsCollection
+  speakerDeckLink(
+    preview: Boolean
+    locale: String
+    where: SpeakerDeckLinkFilter
+  ): SpeakerDeckLink
+  recording(
+    preview: Boolean
+    locale: String
+    where: VideoEmbedFilter
+  ): VideoEmbed
+  watchTime(locale: String): String
+  abstract(locale: String): TalkAbstract
+  transcript(locale: String): TalkTranscript
+}
+
+type TalkLinkingCollections {
+  entryCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+  ): EntryCollection
+}
+
+input PersonFilter {
+  sys: SysFilter
+  contentfulMetadata: ContentfulMetadataFilter
+  name_exists: Boolean
+  name: String
+  name_not: String
+  name_in: [String]
+  name_not_in: [String]
+  name_contains: String
+  name_not_contains: String
+  slug_exists: Boolean
+  slug: String
+  slug_not: String
+  slug_in: [String]
+  slug_not_in: [String]
+  slug_contains: String
+  slug_not_contains: String
+  imageBio_exists: Boolean
+  bioPost_exists: Boolean
+  bioPost: String
+  bioPost_not: String
+  bioPost_in: [String]
+  bioPost_not_in: [String]
+  bioPost_contains: String
+  bioPost_not_contains: String
+  bioShort_exists: Boolean
+  bioShort: String
+  bioShort_not: String
+  bioShort_in: [String]
+  bioShort_not_in: [String]
+  bioShort_contains: String
+  bioShort_not_contains: String
+  bioSpeaker_exists: Boolean
+  bioSpeaker: String
+  bioSpeaker_not: String
+  bioSpeaker_in: [String]
+  bioSpeaker_not_in: [String]
+  bioSpeaker_contains: String
+  bioSpeaker_not_contains: String
+  bioLong_exists: Boolean
+  bioLong_contains: String
+  bioLong_not_contains: String
+  OR: [PersonFilter]
+  AND: [PersonFilter]
+}
+
+input SysFilter {
+  id_exists: Boolean
+  id: String
+  id_not: String
+  id_in: [String]
+  id_not_in: [String]
+  id_contains: String
+  id_not_contains: String
+  publishedAt_exists: Boolean
+  publishedAt: DateTime
+  publishedAt_not: DateTime
+  publishedAt_in: [DateTime]
+  publishedAt_not_in: [DateTime]
+  publishedAt_gt: DateTime
+  publishedAt_gte: DateTime
+  publishedAt_lt: DateTime
+  publishedAt_lte: DateTime
+  firstPublishedAt_exists: Boolean
+  firstPublishedAt: DateTime
+  firstPublishedAt_not: DateTime
+  firstPublishedAt_in: [DateTime]
+  firstPublishedAt_not_in: [DateTime]
+  firstPublishedAt_gt: DateTime
+  firstPublishedAt_gte: DateTime
+  firstPublishedAt_lt: DateTime
+  firstPublishedAt_lte: DateTime
+  publishedVersion_exists: Boolean
+  publishedVersion: Float
+  publishedVersion_not: Float
+  publishedVersion_in: [Float]
+  publishedVersion_not_in: [Float]
+  publishedVersion_gt: Float
+  publishedVersion_gte: Float
+  publishedVersion_lt: Float
+  publishedVersion_lte: Float
+}
+
+input ContentfulMetadataFilter {
+  tags_exists: Boolean
+  tags: ContentfulMetadataTagsFilter
+}
+
+input ContentfulMetadataTagsFilter {
+  id_contains_all: [String]
+  id_contains_some: [String]
+  id_contains_none: [String]
+}
+
+type TalkTopicsCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [Topic]!
+}
+
+# A topic tag for any piece of content. [See type definition](https://app.contentful.com/spaces/56dzm01z6lln/content_types/topic)
+type Topic implements Entry {
+  sys: Sys!
+  contentfulMetadata: ContentfulMetadata!
+  linkedFrom(allowedLocales: [String]): TopicLinkingCollections
+  name(locale: String): String
+  slug(locale: String): String
+  icon(preview: Boolean, locale: String): Asset
+}
+
+type TopicLinkingCollections {
+  entryCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+  ): EntryCollection
+  blogPostCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+    order: [TopicLinkingCollectionsBlogPostCollectionOrder]
+  ): BlogPostCollection
+  talkCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+    order: [TopicLinkingCollectionsTalkCollectionOrder]
+  ): TalkCollection
+}
+
+enum TopicLinkingCollectionsBlogPostCollectionOrder {
+  date_ASC
+  date_DESC
+  hideOutOfDateWarning_ASC
+  hideOutOfDateWarning_DESC
+  updatedDate_ASC
+  updatedDate_DESC
+  title_ASC
+  title_DESC
+  metaTitle_ASC
+  metaTitle_DESC
+  slug_ASC
+  slug_DESC
+  isSponsored_ASC
+  isSponsored_DESC
+  readingTime_ASC
+  readingTime_DESC
+  externalUrl_ASC
+  externalUrl_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+enum TopicLinkingCollectionsTalkCollectionOrder {
+  date_ASC
+  date_DESC
+  title_ASC
+  title_DESC
+  slug_ASC
+  slug_DESC
+  watchTime_ASC
+  watchTime_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+input TopicFilter {
+  sys: SysFilter
+  contentfulMetadata: ContentfulMetadataFilter
+  name_exists: Boolean
+  name: String
+  name_not: String
+  name_in: [String]
+  name_not_in: [String]
+  name_contains: String
+  name_not_contains: String
+  slug_exists: Boolean
+  slug: String
+  slug_not: String
+  slug_in: [String]
+  slug_not_in: [String]
+  slug_contains: String
+  slug_not_contains: String
+  icon_exists: Boolean
+  OR: [TopicFilter]
+  AND: [TopicFilter]
+}
+
+enum TalkTopicsCollectionOrder {
+  name_ASC
+  name_DESC
+  slug_ASC
+  slug_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+# [See type definition](https://app.contentful.com/spaces/56dzm01z6lln/content_types/speakerDeckLink)
+type SpeakerDeckLink implements Entry {
+  sys: Sys!
+  contentfulMetadata: ContentfulMetadata!
+  linkedFrom(allowedLocales: [String]): SpeakerDeckLinkLinkingCollections
+  title(locale: String): String
+  image(preview: Boolean, locale: String): Asset
+  link(locale: String): String
+}
+
+type SpeakerDeckLinkLinkingCollections {
+  entryCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+  ): EntryCollection
+  talkCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+    order: [SpeakerDeckLinkLinkingCollectionsTalkCollectionOrder]
+  ): TalkCollection
+}
+
+enum SpeakerDeckLinkLinkingCollectionsTalkCollectionOrder {
+  date_ASC
+  date_DESC
+  title_ASC
+  title_DESC
+  slug_ASC
+  slug_DESC
+  watchTime_ASC
+  watchTime_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+input SpeakerDeckLinkFilter {
+  sys: SysFilter
+  contentfulMetadata: ContentfulMetadataFilter
+  title_exists: Boolean
+  title: String
+  title_not: String
+  title_in: [String]
+  title_not_in: [String]
+  title_contains: String
+  title_not_contains: String
+  image_exists: Boolean
+  link_exists: Boolean
+  link: String
+  link_not: String
+  link_in: [String]
+  link_not_in: [String]
+  link_contains: String
+  link_not_contains: String
+  OR: [SpeakerDeckLinkFilter]
+  AND: [SpeakerDeckLinkFilter]
+}
+
+# A video entry to embed in page content or a blog post. [See type definition](https://app.contentful.com/spaces/56dzm01z6lln/content_types/videoEmbed)
+type VideoEmbed implements Entry {
+  sys: Sys!
+  contentfulMetadata: ContentfulMetadata!
+  linkedFrom(allowedLocales: [String]): VideoEmbedLinkingCollections
+  title(locale: String): String
+  embedUrl(locale: String): String
+}
+
+type VideoEmbedLinkingCollections {
+  entryCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+  ): EntryCollection
+  talkCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+    order: [VideoEmbedLinkingCollectionsTalkCollectionOrder]
+  ): TalkCollection
+  activityFeedItemCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+    order: [VideoEmbedLinkingCollectionsActivityFeedItemCollectionOrder]
+  ): ActivityFeedItemCollection
+}
+
+enum VideoEmbedLinkingCollectionsTalkCollectionOrder {
+  date_ASC
+  date_DESC
+  title_ASC
+  title_DESC
+  slug_ASC
+  slug_DESC
+  watchTime_ASC
+  watchTime_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+type ActivityFeedItemCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [ActivityFeedItem]!
+}
+
+# Manual item type to show in activity feed. [See type definition](https://app.contentful.com/spaces/56dzm01z6lln/content_types/activityFeedItem)
+type ActivityFeedItem implements Entry {
+  sys: Sys!
+  contentfulMetadata: ContentfulMetadata!
+  linkedFrom(allowedLocales: [String]): ActivityFeedItemLinkingCollections
+  title(locale: String): String
+  date(locale: String): DateTime
+  type(locale: String): String
+  description(locale: String): String
+  link(locale: String): String
+  image(preview: Boolean, locale: String): Asset
+  videoEmbed(
+    preview: Boolean
+    locale: String
+    where: VideoEmbedFilter
+  ): VideoEmbed
+  tweetEmbed(
+    preview: Boolean
+    locale: String
+    where: TweetEmbedFilter
+  ): TweetEmbed
+}
+
+type ActivityFeedItemLinkingCollections {
+  entryCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+  ): EntryCollection
+}
+
+input VideoEmbedFilter {
+  sys: SysFilter
+  contentfulMetadata: ContentfulMetadataFilter
+  title_exists: Boolean
+  title: String
+  title_not: String
+  title_in: [String]
+  title_not_in: [String]
+  title_contains: String
+  title_not_contains: String
+  embedUrl_exists: Boolean
+  embedUrl: String
+  embedUrl_not: String
+  embedUrl_in: [String]
+  embedUrl_not_in: [String]
+  embedUrl_contains: String
+  embedUrl_not_contains: String
+  OR: [VideoEmbedFilter]
+  AND: [VideoEmbedFilter]
+}
+
+# [See type definition](https://app.contentful.com/spaces/56dzm01z6lln/content_types/tweetEmbed)
+type TweetEmbed implements Entry {
+  sys: Sys!
+  contentfulMetadata: ContentfulMetadata!
+  linkedFrom(allowedLocales: [String]): TweetEmbedLinkingCollections
+  description(locale: String): String
+  tweetUrl(locale: String): String
+}
+
+type TweetEmbedLinkingCollections {
+  entryCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+  ): EntryCollection
+  activityFeedItemCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+    order: [TweetEmbedLinkingCollectionsActivityFeedItemCollectionOrder]
+  ): ActivityFeedItemCollection
+}
+
+enum TweetEmbedLinkingCollectionsActivityFeedItemCollectionOrder {
+  title_ASC
+  title_DESC
+  date_ASC
+  date_DESC
+  type_ASC
+  type_DESC
+  link_ASC
+  link_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+input TweetEmbedFilter {
+  sys: SysFilter
+  contentfulMetadata: ContentfulMetadataFilter
+  description_exists: Boolean
+  description: String
+  description_not: String
+  description_in: [String]
+  description_not_in: [String]
+  description_contains: String
+  description_not_contains: String
+  tweetUrl_exists: Boolean
+  tweetUrl: String
+  tweetUrl_not: String
+  tweetUrl_in: [String]
+  tweetUrl_not_in: [String]
+  tweetUrl_contains: String
+  tweetUrl_not_contains: String
+  OR: [TweetEmbedFilter]
+  AND: [TweetEmbedFilter]
+}
+
+enum VideoEmbedLinkingCollectionsActivityFeedItemCollectionOrder {
+  title_ASC
+  title_DESC
+  date_ASC
+  date_DESC
+  type_ASC
+  type_DESC
+  link_ASC
+  link_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+type TalkAbstract {
+  json: JSON!
+  links: TalkAbstractLinks!
+}
+
+# The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+scalar JSON
+
+type TalkAbstractLinks {
+  entries: TalkAbstractEntries!
+  assets: TalkAbstractAssets!
+  resources: TalkAbstractResources!
+}
+
+type TalkAbstractEntries {
+  inline: [Entry]!
+  hyperlink: [Entry]!
+  block: [Entry]!
+}
+
+type TalkAbstractAssets {
+  hyperlink: [Asset]!
+  block: [Asset]!
+}
+
+type TalkAbstractResources {
+  block: [ResourceLink!]!
+  inline: [ResourceLink!]!
+  hyperlink: [ResourceLink!]!
+}
+
+type ResourceLink {
+  sys: ResourceSys!
+}
+
+type ResourceSys {
+  urn: String!
+  type: String!
+  linkType: String!
+}
+
+type TalkTranscript {
+  json: JSON!
+  links: TalkTranscriptLinks!
+}
+
+type TalkTranscriptLinks {
+  entries: TalkTranscriptEntries!
+  assets: TalkTranscriptAssets!
+  resources: TalkTranscriptResources!
+}
+
+type TalkTranscriptEntries {
+  inline: [Entry]!
+  hyperlink: [Entry]!
+  block: [Entry]!
+}
+
+type TalkTranscriptAssets {
+  hyperlink: [Asset]!
+  block: [Asset]!
+}
+
+type TalkTranscriptResources {
+  block: [ResourceLink!]!
+  inline: [ResourceLink!]!
+  hyperlink: [ResourceLink!]!
+}
+
+enum PersonLinkingCollectionsTalkCollectionOrder {
+  date_ASC
+  date_DESC
+  title_ASC
+  title_DESC
+  slug_ASC
+  slug_DESC
+  watchTime_ASC
+  watchTime_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+type PersonBioLong {
+  json: JSON!
+  links: PersonBioLongLinks!
+}
+
+type PersonBioLongLinks {
+  entries: PersonBioLongEntries!
+  assets: PersonBioLongAssets!
+  resources: PersonBioLongResources!
+}
+
+type PersonBioLongEntries {
+  inline: [Entry]!
+  hyperlink: [Entry]!
+  block: [Entry]!
+}
+
+type PersonBioLongAssets {
+  hyperlink: [Asset]!
+  block: [Asset]!
+}
+
+type PersonBioLongResources {
+  block: [ResourceLink!]!
+  inline: [ResourceLink!]!
+  hyperlink: [ResourceLink!]!
+}
+
+type BlogPostTopicsCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [Topic]!
+}
+
+enum BlogPostTopicsCollectionOrder {
+  name_ASC
+  name_DESC
+  slug_ASC
+  slug_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+type BlogPostBody {
+  json: JSON!
+  links: BlogPostBodyLinks!
+}
+
+type BlogPostBodyLinks {
+  entries: BlogPostBodyEntries!
+  assets: BlogPostBodyAssets!
+  resources: BlogPostBodyResources!
+}
+
+type BlogPostBodyEntries {
+  inline: [Entry]!
+  hyperlink: [Entry]!
+  block: [Entry]!
+}
+
+type BlogPostBodyAssets {
+  hyperlink: [Asset]!
+  block: [Asset]!
+}
+
+type BlogPostBodyResources {
+  block: [ResourceLink!]!
+  inline: [ResourceLink!]!
+  hyperlink: [ResourceLink!]!
+}
+
+type BlogPostRelatedPostsCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [BlogPost]!
+}
+
+input BlogPostFilter {
+  author: cfPersonNestedFilter
+  topics: cfTopicNestedFilter
+  relatedPosts: cfBlogPostNestedFilter
+  sys: SysFilter
+  contentfulMetadata: ContentfulMetadataFilter
+  date_exists: Boolean
+  date: DateTime
+  date_not: DateTime
+  date_in: [DateTime]
+  date_not_in: [DateTime]
+  date_gt: DateTime
+  date_gte: DateTime
+  date_lt: DateTime
+  date_lte: DateTime
+  hideOutOfDateWarning_exists: Boolean
+  hideOutOfDateWarning: Boolean
+  hideOutOfDateWarning_not: Boolean
+  updatedDate_exists: Boolean
+  updatedDate: DateTime
+  updatedDate_not: DateTime
+  updatedDate_in: [DateTime]
+  updatedDate_not_in: [DateTime]
+  updatedDate_gt: DateTime
+  updatedDate_gte: DateTime
+  updatedDate_lt: DateTime
+  updatedDate_lte: DateTime
+  title_exists: Boolean
+  title: String
+  title_not: String
+  title_in: [String]
+  title_not_in: [String]
+  title_contains: String
+  title_not_contains: String
+  metaTitle_exists: Boolean
+  metaTitle: String
+  metaTitle_not: String
+  metaTitle_in: [String]
+  metaTitle_not_in: [String]
+  metaTitle_contains: String
+  metaTitle_not_contains: String
+  metaDescription_exists: Boolean
+  metaDescription: String
+  metaDescription_not: String
+  metaDescription_in: [String]
+  metaDescription_not_in: [String]
+  metaDescription_contains: String
+  metaDescription_not_contains: String
+  slug_exists: Boolean
+  slug: String
+  slug_not: String
+  slug_in: [String]
+  slug_not_in: [String]
+  slug_contains: String
+  slug_not_contains: String
+  isSponsored_exists: Boolean
+  isSponsored: Boolean
+  isSponsored_not: Boolean
+  featuredImage_exists: Boolean
+  author_exists: Boolean
+  excerpt_exists: Boolean
+  excerpt: String
+  excerpt_not: String
+  excerpt_in: [String]
+  excerpt_not_in: [String]
+  excerpt_contains: String
+  excerpt_not_contains: String
+  topicsCollection_exists: Boolean
+  body_exists: Boolean
+  body_contains: String
+  body_not_contains: String
+  readingTime_exists: Boolean
+  readingTime: String
+  readingTime_not: String
+  readingTime_in: [String]
+  readingTime_not_in: [String]
+  readingTime_contains: String
+  readingTime_not_contains: String
+  externalUrl_exists: Boolean
+  externalUrl: String
+  externalUrl_not: String
+  externalUrl_in: [String]
+  externalUrl_not_in: [String]
+  externalUrl_contains: String
+  externalUrl_not_contains: String
+  relatedPostsCollection_exists: Boolean
+  OR: [BlogPostFilter]
+  AND: [BlogPostFilter]
+}
+
+input cfPersonNestedFilter {
+  sys: SysFilter
+  contentfulMetadata: ContentfulMetadataFilter
+  name_exists: Boolean
+  name: String
+  name_not: String
+  name_in: [String]
+  name_not_in: [String]
+  name_contains: String
+  name_not_contains: String
+  slug_exists: Boolean
+  slug: String
+  slug_not: String
+  slug_in: [String]
+  slug_not_in: [String]
+  slug_contains: String
+  slug_not_contains: String
+  imageBio_exists: Boolean
+  bioPost_exists: Boolean
+  bioPost: String
+  bioPost_not: String
+  bioPost_in: [String]
+  bioPost_not_in: [String]
+  bioPost_contains: String
+  bioPost_not_contains: String
+  bioShort_exists: Boolean
+  bioShort: String
+  bioShort_not: String
+  bioShort_in: [String]
+  bioShort_not_in: [String]
+  bioShort_contains: String
+  bioShort_not_contains: String
+  bioSpeaker_exists: Boolean
+  bioSpeaker: String
+  bioSpeaker_not: String
+  bioSpeaker_in: [String]
+  bioSpeaker_not_in: [String]
+  bioSpeaker_contains: String
+  bioSpeaker_not_contains: String
+  bioLong_exists: Boolean
+  bioLong_contains: String
+  bioLong_not_contains: String
+  OR: [cfPersonNestedFilter]
+  AND: [cfPersonNestedFilter]
+}
+
+input cfTopicNestedFilter {
+  sys: SysFilter
+  contentfulMetadata: ContentfulMetadataFilter
+  name_exists: Boolean
+  name: String
+  name_not: String
+  name_in: [String]
+  name_not_in: [String]
+  name_contains: String
+  name_not_contains: String
+  slug_exists: Boolean
+  slug: String
+  slug_not: String
+  slug_in: [String]
+  slug_not_in: [String]
+  slug_contains: String
+  slug_not_contains: String
+  icon_exists: Boolean
+  OR: [cfTopicNestedFilter]
+  AND: [cfTopicNestedFilter]
+}
+
+input cfBlogPostNestedFilter {
+  sys: SysFilter
+  contentfulMetadata: ContentfulMetadataFilter
+  date_exists: Boolean
+  date: DateTime
+  date_not: DateTime
+  date_in: [DateTime]
+  date_not_in: [DateTime]
+  date_gt: DateTime
+  date_gte: DateTime
+  date_lt: DateTime
+  date_lte: DateTime
+  hideOutOfDateWarning_exists: Boolean
+  hideOutOfDateWarning: Boolean
+  hideOutOfDateWarning_not: Boolean
+  updatedDate_exists: Boolean
+  updatedDate: DateTime
+  updatedDate_not: DateTime
+  updatedDate_in: [DateTime]
+  updatedDate_not_in: [DateTime]
+  updatedDate_gt: DateTime
+  updatedDate_gte: DateTime
+  updatedDate_lt: DateTime
+  updatedDate_lte: DateTime
+  title_exists: Boolean
+  title: String
+  title_not: String
+  title_in: [String]
+  title_not_in: [String]
+  title_contains: String
+  title_not_contains: String
+  metaTitle_exists: Boolean
+  metaTitle: String
+  metaTitle_not: String
+  metaTitle_in: [String]
+  metaTitle_not_in: [String]
+  metaTitle_contains: String
+  metaTitle_not_contains: String
+  metaDescription_exists: Boolean
+  metaDescription: String
+  metaDescription_not: String
+  metaDescription_in: [String]
+  metaDescription_not_in: [String]
+  metaDescription_contains: String
+  metaDescription_not_contains: String
+  slug_exists: Boolean
+  slug: String
+  slug_not: String
+  slug_in: [String]
+  slug_not_in: [String]
+  slug_contains: String
+  slug_not_contains: String
+  isSponsored_exists: Boolean
+  isSponsored: Boolean
+  isSponsored_not: Boolean
+  featuredImage_exists: Boolean
+  author_exists: Boolean
+  excerpt_exists: Boolean
+  excerpt: String
+  excerpt_not: String
+  excerpt_in: [String]
+  excerpt_not_in: [String]
+  excerpt_contains: String
+  excerpt_not_contains: String
+  topicsCollection_exists: Boolean
+  body_exists: Boolean
+  body_contains: String
+  body_not_contains: String
+  readingTime_exists: Boolean
+  readingTime: String
+  readingTime_not: String
+  readingTime_in: [String]
+  readingTime_not_in: [String]
+  readingTime_contains: String
+  readingTime_not_contains: String
+  externalUrl_exists: Boolean
+  externalUrl: String
+  externalUrl_not: String
+  externalUrl_in: [String]
+  externalUrl_not_in: [String]
+  externalUrl_contains: String
+  externalUrl_not_contains: String
+  relatedPostsCollection_exists: Boolean
+  OR: [cfBlogPostNestedFilter]
+  AND: [cfBlogPostNestedFilter]
+}
+
+enum BlogPostRelatedPostsCollectionOrder {
+  date_ASC
+  date_DESC
+  hideOutOfDateWarning_ASC
+  hideOutOfDateWarning_DESC
+  updatedDate_ASC
+  updatedDate_DESC
+  title_ASC
+  title_DESC
+  metaTitle_ASC
+  metaTitle_DESC
+  slug_ASC
+  slug_DESC
+  isSponsored_ASC
+  isSponsored_DESC
+  readingTime_ASC
+  readingTime_DESC
+  externalUrl_ASC
+  externalUrl_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+type ThingIUseCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [ThingIUse]!
+}
+
+# The technology and tools I use for streaming, coding and everything else. [See type definition](https://app.contentful.com/spaces/56dzm01z6lln/content_types/thingIUse)
+type ThingIUse implements Entry {
+  sys: Sys!
+  contentfulMetadata: ContentfulMetadata!
+  linkedFrom(allowedLocales: [String]): ThingIUseLinkingCollections
+  name(locale: String): String
+  category(locale: String): String
+  image(preview: Boolean, locale: String): Asset
+}
+
+type ThingIUseLinkingCollections {
+  entryCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+  ): EntryCollection
+}
+
+type TestimonialCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [Testimonial]!
+}
+
+# [See type definition](https://app.contentful.com/spaces/56dzm01z6lln/content_types/testimonial)
+type Testimonial implements Entry {
+  sys: Sys!
+  contentfulMetadata: ContentfulMetadata!
+  linkedFrom(allowedLocales: [String]): TestimonialLinkingCollections
+  name(locale: String): String
+  image(preview: Boolean, locale: String): Asset
+  org(locale: String): String
+  link(locale: String): String
+  quote(locale: String): String
+}
+
+type TestimonialLinkingCollections {
+  entryCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+  ): EntryCollection
+}
+
+type PersonCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [Person]!
+}
+
+type EventCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [Event]!
+}
+
+# Appearances and special events. [See type definition](https://app.contentful.com/spaces/56dzm01z6lln/content_types/event)
+type Event implements Entry {
+  sys: Sys!
+  contentfulMetadata: ContentfulMetadata!
+  linkedFrom(allowedLocales: [String]): EventLinkingCollections
+  date(locale: String): DateTime
+  name(locale: String): String
+  description(locale: String): String
+  image(preview: Boolean, locale: String): Asset
+  link(locale: String): String
+}
+
+type EventLinkingCollections {
+  entryCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+  ): EntryCollection
+}
+
+type TopicCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [Topic]!
+}
+
+type SpeakerDeckLinkCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [SpeakerDeckLink]!
+}
+
+type AssetCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [Asset]!
+}
+
+input AssetFilter {
+  sys: SysFilter
+  contentfulMetadata: ContentfulMetadataFilter
+  title_exists: Boolean
+  title: String
+  title_not: String
+  title_in: [String]
+  title_not_in: [String]
+  title_contains: String
+  title_not_contains: String
+  description_exists: Boolean
+  description: String
+  description_not: String
+  description_in: [String]
+  description_not_in: [String]
+  description_contains: String
+  description_not_contains: String
+  url_exists: Boolean
+  url: String
+  url_not: String
+  url_in: [String]
+  url_not_in: [String]
+  url_contains: String
+  url_not_contains: String
+  size_exists: Boolean
+  size: Int
+  size_not: Int
+  size_in: [Int]
+  size_not_in: [Int]
+  size_gt: Int
+  size_gte: Int
+  size_lt: Int
+  size_lte: Int
+  contentType_exists: Boolean
+  contentType: String
+  contentType_not: String
+  contentType_in: [String]
+  contentType_not_in: [String]
+  contentType_contains: String
+  contentType_not_contains: String
+  fileName_exists: Boolean
+  fileName: String
+  fileName_not: String
+  fileName_in: [String]
+  fileName_not_in: [String]
+  fileName_contains: String
+  fileName_not_contains: String
+  width_exists: Boolean
+  width: Int
+  width_not: Int
+  width_in: [Int]
+  width_not_in: [Int]
+  width_gt: Int
+  width_gte: Int
+  width_lt: Int
+  width_lte: Int
+  height_exists: Boolean
+  height: Int
+  height_not: Int
+  height_in: [Int]
+  height_not_in: [Int]
+  height_gt: Int
+  height_gte: Int
+  height_lt: Int
+  height_lte: Int
+  OR: [AssetFilter]
+  AND: [AssetFilter]
+}
+
+enum AssetOrder {
+  url_ASC
+  url_DESC
+  size_ASC
+  size_DESC
+  contentType_ASC
+  contentType_DESC
+  fileName_ASC
+  fileName_DESC
+  width_ASC
+  width_DESC
+  height_ASC
+  height_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+enum BlogPostOrder {
+  date_ASC
+  date_DESC
+  hideOutOfDateWarning_ASC
+  hideOutOfDateWarning_DESC
+  updatedDate_ASC
+  updatedDate_DESC
+  title_ASC
+  title_DESC
+  metaTitle_ASC
+  metaTitle_DESC
+  slug_ASC
+  slug_DESC
+  isSponsored_ASC
+  isSponsored_DESC
+  readingTime_ASC
+  readingTime_DESC
+  externalUrl_ASC
+  externalUrl_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+input TalkFilter {
+  author: cfPersonNestedFilter
+  topics: cfTopicNestedFilter
+  speakerDeckLink: cfSpeakerDeckLinkNestedFilter
+  recording: cfVideoEmbedNestedFilter
+  sys: SysFilter
+  contentfulMetadata: ContentfulMetadataFilter
+  date_exists: Boolean
+  date: DateTime
+  date_not: DateTime
+  date_in: [DateTime]
+  date_not_in: [DateTime]
+  date_gt: DateTime
+  date_gte: DateTime
+  date_lt: DateTime
+  date_lte: DateTime
+  title_exists: Boolean
+  title: String
+  title_not: String
+  title_in: [String]
+  title_not_in: [String]
+  title_contains: String
+  title_not_contains: String
+  slug_exists: Boolean
+  slug: String
+  slug_not: String
+  slug_in: [String]
+  slug_not_in: [String]
+  slug_contains: String
+  slug_not_contains: String
+  metaDescription_exists: Boolean
+  metaDescription: String
+  metaDescription_not: String
+  metaDescription_in: [String]
+  metaDescription_not_in: [String]
+  metaDescription_contains: String
+  metaDescription_not_contains: String
+  excerpt_exists: Boolean
+  excerpt: String
+  excerpt_not: String
+  excerpt_in: [String]
+  excerpt_not_in: [String]
+  excerpt_contains: String
+  excerpt_not_contains: String
+  author_exists: Boolean
+  screenshot_exists: Boolean
+  topicsCollection_exists: Boolean
+  speakerDeckLink_exists: Boolean
+  recording_exists: Boolean
+  watchTime_exists: Boolean
+  watchTime: String
+  watchTime_not: String
+  watchTime_in: [String]
+  watchTime_not_in: [String]
+  watchTime_contains: String
+  watchTime_not_contains: String
+  abstract_exists: Boolean
+  abstract_contains: String
+  abstract_not_contains: String
+  transcript_exists: Boolean
+  transcript_contains: String
+  transcript_not_contains: String
+  OR: [TalkFilter]
+  AND: [TalkFilter]
+}
+
+input cfSpeakerDeckLinkNestedFilter {
+  sys: SysFilter
+  contentfulMetadata: ContentfulMetadataFilter
+  title_exists: Boolean
+  title: String
+  title_not: String
+  title_in: [String]
+  title_not_in: [String]
+  title_contains: String
+  title_not_contains: String
+  image_exists: Boolean
+  link_exists: Boolean
+  link: String
+  link_not: String
+  link_in: [String]
+  link_not_in: [String]
+  link_contains: String
+  link_not_contains: String
+  OR: [cfSpeakerDeckLinkNestedFilter]
+  AND: [cfSpeakerDeckLinkNestedFilter]
+}
+
+input cfVideoEmbedNestedFilter {
+  sys: SysFilter
+  contentfulMetadata: ContentfulMetadataFilter
+  title_exists: Boolean
+  title: String
+  title_not: String
+  title_in: [String]
+  title_not_in: [String]
+  title_contains: String
+  title_not_contains: String
+  embedUrl_exists: Boolean
+  embedUrl: String
+  embedUrl_not: String
+  embedUrl_in: [String]
+  embedUrl_not_in: [String]
+  embedUrl_contains: String
+  embedUrl_not_contains: String
+  OR: [cfVideoEmbedNestedFilter]
+  AND: [cfVideoEmbedNestedFilter]
+}
+
+enum TalkOrder {
+  date_ASC
+  date_DESC
+  title_ASC
+  title_DESC
+  slug_ASC
+  slug_DESC
+  watchTime_ASC
+  watchTime_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+# Embed an arcade iframe element. [See type definition](https://app.contentful.com/spaces/56dzm01z6lln/content_types/arcadeEmbed)
+type ArcadeEmbed implements Entry {
+  sys: Sys!
+  contentfulMetadata: ContentfulMetadata!
+  linkedFrom(allowedLocales: [String]): ArcadeEmbedLinkingCollections
+  title(locale: String): String
+  embedCode(locale: String): String
+}
+
+type ArcadeEmbedLinkingCollections {
+  entryCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+  ): EntryCollection
+}
+
+type ArcadeEmbedCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [ArcadeEmbed]!
+}
+
+input ArcadeEmbedFilter {
+  sys: SysFilter
+  contentfulMetadata: ContentfulMetadataFilter
+  title_exists: Boolean
+  title: String
+  title_not: String
+  title_in: [String]
+  title_not_in: [String]
+  title_contains: String
+  title_not_contains: String
+  embedCode_exists: Boolean
+  embedCode: String
+  embedCode_not: String
+  embedCode_in: [String]
+  embedCode_not_in: [String]
+  embedCode_contains: String
+  embedCode_not_contains: String
+  OR: [ArcadeEmbedFilter]
+  AND: [ArcadeEmbedFilter]
+}
+
+enum ArcadeEmbedOrder {
+  title_ASC
+  title_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+input ThingIUseFilter {
+  sys: SysFilter
+  contentfulMetadata: ContentfulMetadataFilter
+  name_exists: Boolean
+  name: String
+  name_not: String
+  name_in: [String]
+  name_not_in: [String]
+  name_contains: String
+  name_not_contains: String
+  category_exists: Boolean
+  category: String
+  category_not: String
+  category_in: [String]
+  category_not_in: [String]
+  category_contains: String
+  category_not_contains: String
+  image_exists: Boolean
+  OR: [ThingIUseFilter]
+  AND: [ThingIUseFilter]
+}
+
+enum ThingIUseOrder {
+  name_ASC
+  name_DESC
+  category_ASC
+  category_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+# Sponsorships and collaborations and all sorts of other content. [See type definition](https://app.contentful.com/spaces/56dzm01z6lln/content_types/sponsorshipPage)
+type SponsorshipPage implements Entry {
+  sys: Sys!
+  contentfulMetadata: ContentfulMetadata!
+  linkedFrom(allowedLocales: [String]): SponsorshipPageLinkingCollections
+  title(locale: String): String
+  metaTitle(locale: String): String
+  metaDescription(locale: String): String
+  slug(locale: String): String
+  intro(locale: String): String
+  packagesIntro(locale: String): String
+  streamsIntro(locale: String): String
+  streamPackagesCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+    where: StreamPackageFilter
+    order: [SponsorshipPageStreamPackagesCollectionOrder]
+  ): SponsorshipPageStreamPackagesCollection
+  technicalTutorials(locale: String): String
+  demoAppsAndWebsites(locale: String): String
+  videoContent(locale: String): String
+}
+
+type SponsorshipPageLinkingCollections {
+  entryCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+  ): EntryCollection
+}
+
+type SponsorshipPageStreamPackagesCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [StreamPackage]!
+}
+
+# [See type definition](https://app.contentful.com/spaces/56dzm01z6lln/content_types/streamPackage)
+type StreamPackage implements Entry {
+  sys: Sys!
+  contentfulMetadata: ContentfulMetadata!
+  linkedFrom(allowedLocales: [String]): StreamPackageLinkingCollections
+  title(locale: String): String
+  description(locale: String): String
+}
+
+type StreamPackageLinkingCollections {
+  entryCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+  ): EntryCollection
+  sponsorshipPageCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+    order: [StreamPackageLinkingCollectionsSponsorshipPageCollectionOrder]
+  ): SponsorshipPageCollection
+}
+
+type SponsorshipPageCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [SponsorshipPage]!
+}
+
+enum StreamPackageLinkingCollectionsSponsorshipPageCollectionOrder {
+  title_ASC
+  title_DESC
+  metaTitle_ASC
+  metaTitle_DESC
+  slug_ASC
+  slug_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+input StreamPackageFilter {
+  sys: SysFilter
+  contentfulMetadata: ContentfulMetadataFilter
+  title_exists: Boolean
+  title: String
+  title_not: String
+  title_in: [String]
+  title_not_in: [String]
+  title_contains: String
+  title_not_contains: String
+  description_exists: Boolean
+  description: String
+  description_not: String
+  description_in: [String]
+  description_not_in: [String]
+  description_contains: String
+  description_not_contains: String
+  OR: [StreamPackageFilter]
+  AND: [StreamPackageFilter]
+}
+
+enum SponsorshipPageStreamPackagesCollectionOrder {
+  title_ASC
+  title_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+input SponsorshipPageFilter {
+  streamPackages: cfStreamPackageNestedFilter
+  sys: SysFilter
+  contentfulMetadata: ContentfulMetadataFilter
+  title_exists: Boolean
+  title: String
+  title_not: String
+  title_in: [String]
+  title_not_in: [String]
+  title_contains: String
+  title_not_contains: String
+  metaTitle_exists: Boolean
+  metaTitle: String
+  metaTitle_not: String
+  metaTitle_in: [String]
+  metaTitle_not_in: [String]
+  metaTitle_contains: String
+  metaTitle_not_contains: String
+  metaDescription_exists: Boolean
+  metaDescription: String
+  metaDescription_not: String
+  metaDescription_in: [String]
+  metaDescription_not_in: [String]
+  metaDescription_contains: String
+  metaDescription_not_contains: String
+  slug_exists: Boolean
+  slug: String
+  slug_not: String
+  slug_in: [String]
+  slug_not_in: [String]
+  slug_contains: String
+  slug_not_contains: String
+  intro_exists: Boolean
+  intro: String
+  intro_not: String
+  intro_in: [String]
+  intro_not_in: [String]
+  intro_contains: String
+  intro_not_contains: String
+  packagesIntro_exists: Boolean
+  packagesIntro: String
+  packagesIntro_not: String
+  packagesIntro_in: [String]
+  packagesIntro_not_in: [String]
+  packagesIntro_contains: String
+  packagesIntro_not_contains: String
+  streamsIntro_exists: Boolean
+  streamsIntro: String
+  streamsIntro_not: String
+  streamsIntro_in: [String]
+  streamsIntro_not_in: [String]
+  streamsIntro_contains: String
+  streamsIntro_not_contains: String
+  streamPackagesCollection_exists: Boolean
+  technicalTutorials_exists: Boolean
+  technicalTutorials: String
+  technicalTutorials_not: String
+  technicalTutorials_in: [String]
+  technicalTutorials_not_in: [String]
+  technicalTutorials_contains: String
+  technicalTutorials_not_contains: String
+  demoAppsAndWebsites_exists: Boolean
+  demoAppsAndWebsites: String
+  demoAppsAndWebsites_not: String
+  demoAppsAndWebsites_in: [String]
+  demoAppsAndWebsites_not_in: [String]
+  demoAppsAndWebsites_contains: String
+  demoAppsAndWebsites_not_contains: String
+  videoContent_exists: Boolean
+  videoContent: String
+  videoContent_not: String
+  videoContent_in: [String]
+  videoContent_not_in: [String]
+  videoContent_contains: String
+  videoContent_not_contains: String
+  OR: [SponsorshipPageFilter]
+  AND: [SponsorshipPageFilter]
+}
+
+input cfStreamPackageNestedFilter {
+  sys: SysFilter
+  contentfulMetadata: ContentfulMetadataFilter
+  title_exists: Boolean
+  title: String
+  title_not: String
+  title_in: [String]
+  title_not_in: [String]
+  title_contains: String
+  title_not_contains: String
+  description_exists: Boolean
+  description: String
+  description_not: String
+  description_in: [String]
+  description_not_in: [String]
+  description_contains: String
+  description_not_contains: String
+  OR: [cfStreamPackageNestedFilter]
+  AND: [cfStreamPackageNestedFilter]
+}
+
+enum SponsorshipPageOrder {
+  title_ASC
+  title_DESC
+  metaTitle_ASC
+  metaTitle_DESC
+  slug_ASC
+  slug_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+type StreamPackageCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [StreamPackage]!
+}
+
+enum StreamPackageOrder {
+  title_ASC
+  title_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+input TestimonialFilter {
+  sys: SysFilter
+  contentfulMetadata: ContentfulMetadataFilter
+  name_exists: Boolean
+  name: String
+  name_not: String
+  name_in: [String]
+  name_not_in: [String]
+  name_contains: String
+  name_not_contains: String
+  image_exists: Boolean
+  org_exists: Boolean
+  org: String
+  org_not: String
+  org_in: [String]
+  org_not_in: [String]
+  org_contains: String
+  org_not_contains: String
+  link_exists: Boolean
+  link: String
+  link_not: String
+  link_in: [String]
+  link_not_in: [String]
+  link_contains: String
+  link_not_contains: String
+  quote_exists: Boolean
+  quote: String
+  quote_not: String
+  quote_in: [String]
+  quote_not_in: [String]
+  quote_contains: String
+  quote_not_contains: String
+  OR: [TestimonialFilter]
+  AND: [TestimonialFilter]
+}
+
+enum TestimonialOrder {
+  name_ASC
+  name_DESC
+  org_ASC
+  org_DESC
+  link_ASC
+  link_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+enum PersonOrder {
+  name_ASC
+  name_DESC
+  slug_ASC
+  slug_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+input EventFilter {
+  sys: SysFilter
+  contentfulMetadata: ContentfulMetadataFilter
+  date_exists: Boolean
+  date: DateTime
+  date_not: DateTime
+  date_in: [DateTime]
+  date_not_in: [DateTime]
+  date_gt: DateTime
+  date_gte: DateTime
+  date_lt: DateTime
+  date_lte: DateTime
+  name_exists: Boolean
+  name: String
+  name_not: String
+  name_in: [String]
+  name_not_in: [String]
+  name_contains: String
+  name_not_contains: String
+  description_exists: Boolean
+  description: String
+  description_not: String
+  description_in: [String]
+  description_not_in: [String]
+  description_contains: String
+  description_not_contains: String
+  image_exists: Boolean
+  link_exists: Boolean
+  link: String
+  link_not: String
+  link_in: [String]
+  link_not_in: [String]
+  link_contains: String
+  link_not_contains: String
+  OR: [EventFilter]
+  AND: [EventFilter]
+}
+
+enum EventOrder {
+  date_ASC
+  date_DESC
+  name_ASC
+  name_DESC
+  link_ASC
+  link_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+input ActivityFeedItemFilter {
+  videoEmbed: cfVideoEmbedNestedFilter
+  tweetEmbed: cfTweetEmbedNestedFilter
+  sys: SysFilter
+  contentfulMetadata: ContentfulMetadataFilter
+  title_exists: Boolean
+  title: String
+  title_not: String
+  title_in: [String]
+  title_not_in: [String]
+  title_contains: String
+  title_not_contains: String
+  date_exists: Boolean
+  date: DateTime
+  date_not: DateTime
+  date_in: [DateTime]
+  date_not_in: [DateTime]
+  date_gt: DateTime
+  date_gte: DateTime
+  date_lt: DateTime
+  date_lte: DateTime
+  type_exists: Boolean
+  type: String
+  type_not: String
+  type_in: [String]
+  type_not_in: [String]
+  type_contains: String
+  type_not_contains: String
+  description_exists: Boolean
+  description: String
+  description_not: String
+  description_in: [String]
+  description_not_in: [String]
+  description_contains: String
+  description_not_contains: String
+  link_exists: Boolean
+  link: String
+  link_not: String
+  link_in: [String]
+  link_not_in: [String]
+  link_contains: String
+  link_not_contains: String
+  image_exists: Boolean
+  videoEmbed_exists: Boolean
+  tweetEmbed_exists: Boolean
+  OR: [ActivityFeedItemFilter]
+  AND: [ActivityFeedItemFilter]
+}
+
+input cfTweetEmbedNestedFilter {
+  sys: SysFilter
+  contentfulMetadata: ContentfulMetadataFilter
+  description_exists: Boolean
+  description: String
+  description_not: String
+  description_in: [String]
+  description_not_in: [String]
+  description_contains: String
+  description_not_contains: String
+  tweetUrl_exists: Boolean
+  tweetUrl: String
+  tweetUrl_not: String
+  tweetUrl_in: [String]
+  tweetUrl_not_in: [String]
+  tweetUrl_contains: String
+  tweetUrl_not_contains: String
+  OR: [cfTweetEmbedNestedFilter]
+  AND: [cfTweetEmbedNestedFilter]
+}
+
+enum ActivityFeedItemOrder {
+  title_ASC
+  title_DESC
+  date_ASC
+  date_DESC
+  type_ASC
+  type_DESC
+  link_ASC
+  link_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+# A block of code in a specified language. [See type definition](https://app.contentful.com/spaces/56dzm01z6lln/content_types/codeBlock)
+type CodeBlock implements Entry {
+  sys: Sys!
+  contentfulMetadata: ContentfulMetadata!
+  linkedFrom(allowedLocales: [String]): CodeBlockLinkingCollections
+  description(locale: String): String
+  language(locale: String): String
+  isDiff(locale: String): Boolean
+  code(locale: String): String
+}
+
+type CodeBlockLinkingCollections {
+  entryCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+  ): EntryCollection
+}
+
+type CodeBlockCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [CodeBlock]!
+}
+
+input CodeBlockFilter {
+  sys: SysFilter
+  contentfulMetadata: ContentfulMetadataFilter
+  description_exists: Boolean
+  description: String
+  description_not: String
+  description_in: [String]
+  description_not_in: [String]
+  description_contains: String
+  description_not_contains: String
+  language_exists: Boolean
+  language: String
+  language_not: String
+  language_in: [String]
+  language_not_in: [String]
+  language_contains: String
+  language_not_contains: String
+  isDiff_exists: Boolean
+  isDiff: Boolean
+  isDiff_not: Boolean
+  code_exists: Boolean
+  code: String
+  code_not: String
+  code_in: [String]
+  code_not_in: [String]
+  code_contains: String
+  code_not_contains: String
+  OR: [CodeBlockFilter]
+  AND: [CodeBlockFilter]
+}
+
+enum CodeBlockOrder {
+  description_ASC
+  description_DESC
+  language_ASC
+  language_DESC
+  isDiff_ASC
+  isDiff_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+# A component to highlight important information in a blog post. [See type definition](https://app.contentful.com/spaces/56dzm01z6lln/content_types/callout)
+type Callout implements Entry {
+  sys: Sys!
+  contentfulMetadata: ContentfulMetadata!
+  linkedFrom(allowedLocales: [String]): CalloutLinkingCollections
+  title(locale: String): String
+  emoji(locale: String): String
+  content(locale: String): String
+}
+
+type CalloutLinkingCollections {
+  entryCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+  ): EntryCollection
+}
+
+type CalloutCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [Callout]!
+}
+
+input CalloutFilter {
+  sys: SysFilter
+  contentfulMetadata: ContentfulMetadataFilter
+  title_exists: Boolean
+  title: String
+  title_not: String
+  title_in: [String]
+  title_not_in: [String]
+  title_contains: String
+  title_not_contains: String
+  emoji_exists: Boolean
+  emoji: String
+  emoji_not: String
+  emoji_in: [String]
+  emoji_not_in: [String]
+  emoji_contains: String
+  emoji_not_contains: String
+  content_exists: Boolean
+  content: String
+  content_not: String
+  content_in: [String]
+  content_not_in: [String]
+  content_contains: String
+  content_not_contains: String
+  OR: [CalloutFilter]
+  AND: [CalloutFilter]
+}
+
+enum CalloutOrder {
+  title_ASC
+  title_DESC
+  emoji_ASC
+  emoji_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+# [See type definition](https://app.contentful.com/spaces/56dzm01z6lln/content_types/deployToNetlifyButton)
+type DeployToNetlifyButton implements Entry {
+  sys: Sys!
+  contentfulMetadata: ContentfulMetadata!
+  linkedFrom(allowedLocales: [String]): DeployToNetlifyButtonLinkingCollections
+  title(locale: String): String
+  deployUrl(locale: String): String
+}
+
+type DeployToNetlifyButtonLinkingCollections {
+  entryCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+  ): EntryCollection
+}
+
+type DeployToNetlifyButtonCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [DeployToNetlifyButton]!
+}
+
+input DeployToNetlifyButtonFilter {
+  sys: SysFilter
+  contentfulMetadata: ContentfulMetadataFilter
+  title_exists: Boolean
+  title: String
+  title_not: String
+  title_in: [String]
+  title_not_in: [String]
+  title_contains: String
+  title_not_contains: String
+  deployUrl_exists: Boolean
+  deployUrl: String
+  deployUrl_not: String
+  deployUrl_in: [String]
+  deployUrl_not_in: [String]
+  deployUrl_contains: String
+  deployUrl_not_contains: String
+  OR: [DeployToNetlifyButtonFilter]
+  AND: [DeployToNetlifyButtonFilter]
+}
+
+enum DeployToNetlifyButtonOrder {
+  title_ASC
+  title_DESC
+  deployUrl_ASC
+  deployUrl_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+# [See type definition](https://app.contentful.com/spaces/56dzm01z6lln/content_types/codePenEmbed)
+type CodePenEmbed implements Entry {
+  sys: Sys!
+  contentfulMetadata: ContentfulMetadata!
+  linkedFrom(allowedLocales: [String]): CodePenEmbedLinkingCollections
+  title(locale: String): String
+  embedCode(locale: String): String
+}
+
+type CodePenEmbedLinkingCollections {
+  entryCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+  ): EntryCollection
+}
+
+type CodePenEmbedCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [CodePenEmbed]!
+}
+
+input CodePenEmbedFilter {
+  sys: SysFilter
+  contentfulMetadata: ContentfulMetadataFilter
+  title_exists: Boolean
+  title: String
+  title_not: String
+  title_in: [String]
+  title_not_in: [String]
+  title_contains: String
+  title_not_contains: String
+  embedCode_exists: Boolean
+  embedCode: String
+  embedCode_not: String
+  embedCode_in: [String]
+  embedCode_not_in: [String]
+  embedCode_contains: String
+  embedCode_not_contains: String
+  OR: [CodePenEmbedFilter]
+  AND: [CodePenEmbedFilter]
+}
+
+enum CodePenEmbedOrder {
+  title_ASC
+  title_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+# Display a before/after of a Lighthouse score. [See type definition](https://app.contentful.com/spaces/56dzm01z6lln/content_types/lighthouseComparison)
+type LighthouseComparison implements Entry {
+  sys: Sys!
+  contentfulMetadata: ContentfulMetadata!
+  linkedFrom(allowedLocales: [String]): LighthouseComparisonLinkingCollections
+  titleInternal(locale: String): String
+  metric(locale: String): String
+  device(locale: String): String
+  url(locale: String): String
+  beforeScore(locale: String): Int
+  afterScore(locale: String): Int
+}
+
+type LighthouseComparisonLinkingCollections {
+  entryCollection(
+    skip: Int = 0
+    limit: Int = 100
+    preview: Boolean
+    locale: String
+  ): EntryCollection
+}
+
+type LighthouseComparisonCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [LighthouseComparison]!
+}
+
+input LighthouseComparisonFilter {
+  sys: SysFilter
+  contentfulMetadata: ContentfulMetadataFilter
+  titleInternal_exists: Boolean
+  titleInternal: String
+  titleInternal_not: String
+  titleInternal_in: [String]
+  titleInternal_not_in: [String]
+  titleInternal_contains: String
+  titleInternal_not_contains: String
+  metric_exists: Boolean
+  metric: String
+  metric_not: String
+  metric_in: [String]
+  metric_not_in: [String]
+  metric_contains: String
+  metric_not_contains: String
+  device_exists: Boolean
+  device: String
+  device_not: String
+  device_in: [String]
+  device_not_in: [String]
+  device_contains: String
+  device_not_contains: String
+  url_exists: Boolean
+  url: String
+  url_not: String
+  url_in: [String]
+  url_not_in: [String]
+  url_contains: String
+  url_not_contains: String
+  beforeScore_exists: Boolean
+  beforeScore: Int
+  beforeScore_not: Int
+  beforeScore_in: [Int]
+  beforeScore_not_in: [Int]
+  beforeScore_gt: Int
+  beforeScore_gte: Int
+  beforeScore_lt: Int
+  beforeScore_lte: Int
+  afterScore_exists: Boolean
+  afterScore: Int
+  afterScore_not: Int
+  afterScore_in: [Int]
+  afterScore_not_in: [Int]
+  afterScore_gt: Int
+  afterScore_gte: Int
+  afterScore_lt: Int
+  afterScore_lte: Int
+  OR: [LighthouseComparisonFilter]
+  AND: [LighthouseComparisonFilter]
+}
+
+enum LighthouseComparisonOrder {
+  titleInternal_ASC
+  titleInternal_DESC
+  metric_ASC
+  metric_DESC
+  device_ASC
+  device_DESC
+  url_ASC
+  url_DESC
+  beforeScore_ASC
+  beforeScore_DESC
+  afterScore_ASC
+  afterScore_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+type TweetEmbedCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [TweetEmbed]!
+}
+
+enum TweetEmbedOrder {
+  description_ASC
+  description_DESC
+  tweetUrl_ASC
+  tweetUrl_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+enum TopicOrder {
+  name_ASC
+  name_DESC
+  slug_ASC
+  slug_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+type VideoEmbedCollection {
+  total: Int!
+  skip: Int!
+  limit: Int!
+  items: [VideoEmbed]!
+}
+
+enum VideoEmbedOrder {
+  title_ASC
+  title_DESC
+  embedUrl_ASC
+  embedUrl_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+enum SpeakerDeckLinkOrder {
+  title_ASC
+  title_DESC
+  link_ASC
+  link_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+input EntryFilter {
+  sys: SysFilter
+  contentfulMetadata: ContentfulMetadataFilter
+  OR: [EntryFilter]
+  AND: [EntryFilter]
+}
+
+enum EntryOrder {
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+scalar _FieldSet
+
+scalar _Any
+
+type _Service {
+  sdl: String
+}
+
+union _Entity =
+    ActivityFeedItem
+  | ArcadeEmbed
+  | BlogPost
+  | Callout
+  | CodeBlock
+  | CodePenEmbed
+  | DeployToNetlifyButton
+  | Event
+  | LighthouseComparison
+  | Person
+  | SpeakerDeckLink
+  | SponsorshipPage
+  | StreamPackage
+  | Talk
+  | Testimonial
+  | ThingIUse
+  | Topic
+  | TweetEmbed
+  | VideoEmbed

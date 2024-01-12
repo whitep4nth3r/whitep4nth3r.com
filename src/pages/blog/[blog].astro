@@ -1,22 +1,20 @@
 ---
 import { ContentfulBlogPosts } from "@lib/contentfulBlogPosts";
+import type { BlogPost } from "@lib/contentfulTypes";
 
 export async function getStaticPaths() {
-  const blogPosts: any = await ContentfulBlogPosts.getAll();
-
-  console.log(blogPosts);
+  const blogPosts: BlogPost[] = await ContentfulBlogPosts.getAll();
 
   const pages = blogPosts.map((item) => ({
     params: { blog: item.slug },
-    props: {
-      post: item,
-    },
+    props: item,
   }));
+
   return pages;
 }
 
-//todo — do types?
-const { post }: any = Astro.props;
+const post = Astro.props;
 ---
 
 {post.title}
+{post.author.name}
